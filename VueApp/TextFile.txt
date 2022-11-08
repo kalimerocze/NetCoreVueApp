@@ -1,0 +1,16 @@
+﻿
+Prida migraci db - pri zmene schematu
+Add-Migration "nazevMigrace"
+---nyní update databáze
+Update-database
+
+
+---odstraneni migrace
+remove-migration
+
+
+
+
+--------------------history table 
+ db.temporalAll()
+ db.TemporalAsOf()

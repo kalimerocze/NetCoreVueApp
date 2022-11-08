@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue + vuetify app</title>
+    <link href="lib/vuetify/dist/vuetify.css" rel="stylesheet" />
+    <link href="lib/mdi/font/css/materialdesignicons.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="app">
+        <v-app id="inspire">
+            <v-layout row justify-center fill-height>
+                <v-toolbar dark color="green darken-1" class="hidden-xs-and-down">
+                    <v-toolbar-items>
+                        <v-btn text fill-height
+                               @click="reloadPage()">
+                            <v-icon>mdi-account</v-icon> Vue App
+                        </v-btn>
+                    </v-toolbar-items>
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items>
+                      
+                        <v-btn text fill-height> <router-link style="text-decoration: none; color: inherit;" to="/home"><v-icon>mdi-home</v-icon>Home </router-link></v-btn> &nbsp;
+                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/soubor"><v-icon>mdi-file</v-icon>Soubory </router-link></v-btn> &nbsp;
+                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/upload"><v-icon>mdi-upload</v-icon>Upload </router-link></v-btn>
+                        <v-menu offset-y>
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn color="green darken-1" v-ripple="false"
+                                       dark
+                                       v-bind="attrs"
+                                       v-on="on">
+                                    <v-icon>mdi-menu</v-icon>  Menu
+                                </v-btn>
+                            </template>
+                            <v-list>
+                                <v-list-item>
+
+                                    <v-list-item-title>
+                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/odkazy"> <v-icon>mdi-link</v-icon>Administrace odkazů </router-link></v-btn> &nbsp;
+                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/clanky"> <v-icon>mdi-paper</v-icon>Administrace článků </router-link></v-btn> &nbsp;
+                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/upload">Uplaod</router-link></v-btn>
+                                    </v-list-item-title>
+                                </v-list-item>
+                            </v-list>
+                        </v-menu>
+
+                    </v-toolbar-items>
+                    <v-toolbar-items>
+                    </v-toolbar-items>
+                </v-toolbar>
+
+                <v-container fluid style="min-height:750px">
+                    <v-card elevation="4" class="mx-auto my-12"
+                            max-width="1000">
+                        <router-view></router-view>
+                    </v-card>
+                </v-container>
+                <v-bottom-navigation background-color="green darken-1"
+                                     dark>
+                    <v-row justify="center" align="center"> &copy; 2022 - AJ</v-row>
+                </v-bottom-navigation>
+            </v-layout>
+        </v-app>
+    </div>
+    <script src="/lib/babel-polyfill//dist//polyfill.js"></script>
+    <script src="/lib/vue/dist/vue.js"></script>
+    <script src="/lib/vuetify/dist/vuetify.js"></script>
+    <script src="/lib/axios/dist/axios.js"></script>
+    <script src="https://unpkg.com/vue-router@3"></script>
+    <script src="home.js"></script>
+    <script src="Upload.js"></script>
+    <script src="Soubor.js"></script>
+    <script src="Odkazy.js"></script>
+    <script src="Clanky.js"></script>
+    <!-- Vue Pages -->
+    <script>
+        const Foo = { template: '<div>Stránka číslo 1</div>' }
+        const Bar = { template: '<div>stránka číslo 2 bar</div>' }
+
+        const NotFound = { template: '<div>Nenalezeno!!! zkuste to prosím později</div>' }
+
+        const routes = [
+            { path: '/home', component: Home },
+            { path: '/upload', component: Upload },
+            { path: '/clanky', component: Clanky },
+          //  { path: '/bar', component: Home },
+            { path: '/soubor', component: Soubor },
+            { path: '/odkazy', component: Odkazy },
+            { path: '/*', component: Home }
+            //{ path: '*', component: NotFound }
+
+        ]
+
+        //const router = VueRouter.createRouter({
+        //    // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
+        //   // history: VueRouter.createWebHashHistory(),
+        //    routes, // short for `routes: routes`
+        //})
+
+        const router = new VueRouter({
+            routes // short for `routes: routes`
+        })
+
+
+        const app = new Vue({
+            el: '#app',
+            router,
+
+            vuetify: new Vuetify({
+                lang: {
+                    current: 'cs',
+                }
+            }),
+
+            data: {
+                colorMsg: 'red',
+                typeMsg: 'success',
+                formFiles: null,
+                showMsg: false,
+                resultMsg: '',
+                dialog: false,
+
+                nav: [
+                    {
+                        icon: 'mdi-home',
+                        text: 'Domů',
+                        title: 'Zpět na domovskou stránku',
+                        active: true,
+                        name: 'page1'
+                    }
+                ]
+            },
+
+            methods: {
+                reloadPage: function () {
+                    window.location.reload();
+                },
+                clear() {
+                    this.$refs.entryForm.reset()
+
+                },
+            }
+        });
+    </script>
+</body>
+</html>
