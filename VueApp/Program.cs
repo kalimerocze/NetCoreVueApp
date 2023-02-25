@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using VueApp;
 using VueApp.Context;
 
 var builder = WebApplication.CreateBuilder(args);//vytvori root aplikace
@@ -9,9 +10,15 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+// Add your logging handler
+builder.Host.ConfigureLogging(builder =>
+{   // Configuration here:
+    builder.SetMinimumLevel(LogLevel.Trace);
+    builder.AddLog4Net("log4net.config");
+});
 builder.Configuration.AddJsonFile($"AppSettings.json", true, true);
 builder.Services.AddDbContext<VueAppDbContext>(options => options.UseSqlServer(builder.Configuration["DevConnection"]));
+builder.Services.Configure<AppSettingsModel>(builder.Configuration.GetSection("ApplicationSettings"));
 
 var app = builder.Build();
 
