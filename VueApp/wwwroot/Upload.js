@@ -11,7 +11,7 @@
                 <v-slide-y-transition mode="out-in">
                     <v-layout column align-start>
                         <h1 class="display-1">Server1 externích informačních zdrojů </h1><br><br >
-                        Import zpráv z NewtonIT <br />Vyberte xml soubor se zprávami z NewtonIT.
+                        Import souborů <br />Vyberte xml soubor.
                         <v-form class="block" ref="entryForm">
                             <v-container>
                                 <v-flex>
@@ -24,7 +24,7 @@
                         </v-form>
                     </v-layout>
                 </v-slide-y-transition>
-                <v-btn type="button" @click="clear"> clear </v-btn>
+                <v-btn type="button" @click="clear"> Resetovat </v-btn>
             </v-container>
         </v-form>
     </div>
@@ -47,6 +47,7 @@
         }
     },
     created() {
-        window.document.title = 'Upload form - Vue'
+    //nazevv tabu
+        window.document.title = 'Upload formulář - Vue'
     }
 }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using VueApp;
 using VueApp.Context;
@@ -19,6 +20,7 @@ builder.Host.ConfigureLogging(builder =>
 builder.Configuration.AddJsonFile($"AppSettings.json", true, true);
 builder.Services.AddDbContext<VueAppDbContext>(options => options.UseSqlServer(builder.Configuration["DevConnection"]));
 builder.Services.Configure<AppSettingsModel>(builder.Configuration.GetSection("ApplicationSettings"));
+//builder.Services.AddScoped<IClaimsTransformer, MyClaimsTransformer>(); 
 
 var app = builder.Build();
 
