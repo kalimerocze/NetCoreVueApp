@@ -1,4 +1,4 @@
-﻿const Kontakty = {
+﻿const prehledClanky = {
     template: `
     <div>
             <v-container>
@@ -9,37 +9,18 @@
                 </v-alert>
                 <v-slide-y-transition mode="out-in">
                     <v-layout column align-start>
-                        <h1 class="display-1">Přehled kontaktů <br /><br /></h1>
-                    
-                            <v-simple-table dense  style='width:100vw;'>
-                     <thead>
-      <tr>
-        <th class="text-left">
-          Id
-        </th>
-        <th class="text-left">
-          Jméno
-        </th>
-        <th class="text-left">
-          Přijmení
-        </th>
-        <th class="text-left">
-          Telefon
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="(kontakt,i ) in kontakty"
-        :key="i"
-      >
-        <td>{{ kontakt.id }}</td>
-        <td>{{ kontakt.jmeno }}</td>
-        <td>{{ kontakt.prijmeni }}</td>
-        <td>{{ kontakt.telefon }}</td>
-      </tr>
-    </tbody>
-  </v-simple-table >
+                        <h1 class="display-1">Přehled článků <br /><br /></h1>
+                    <div v-for="(novinka,i ) in clanky"
+        :key="i">
+                           <v-card width="400">
+      <h1>{{ novinka.id }}</h1>
+
+    <p> {{ novinka.telo }}</p>
+
+    </v-card>
+    </div>
+
+              
 
 
                     </v-layout>
@@ -50,25 +31,19 @@
     `,
     data() {
         return {
-            text: 'Kontakty',
+            text: 'Články',
             isEnable: false,
             colorMsg: 'red',
             typeMsg: 'success',
-            kontakty: [
-                { id: 1, jmeno: 'Petr', prijmeni: 'Pavel', telefon :'444222111'},
-                { id: 2, jmeno: 'Marek', prijmeni: 'Novák', telefon: '444222111' },
-                { id: 3, jmeno: 'Radek', prijmeni: 'Novák', telefon: '444222111' },
-                { id: 4, jmeno: 'Kateřina', prijmeni: 'Nováková', telefon: '444222111' }
+            clanky: [
+                { id: 1, nadpis: 'nadpis1', telo: 'clanek 1 '},
+                { id: 2, nadpis: 'nadpis 2 ', telo: 'clanek 2'},
+                { id: 3, nadpis: 'nadpis3 ', telo: 'clanek 3'}
+                
+              
         ],
-            Kontakt: {
-                id:'',
-                jmeno: '',
-                prijmeni: '',
-               telefon:''
-
-
-            }
-            ,
+           
+            
             showMsg: false,
             resultMsg: '',
             dialog: false,

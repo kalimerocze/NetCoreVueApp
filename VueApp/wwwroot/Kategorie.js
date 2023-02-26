@@ -1,6 +1,6 @@
-﻿const Odkazy = {
+﻿const Kategorie = {
     template: `
-  <div>
+    <div>
         <v-form ref="entryForm" id="form" name="idForm">
             <v-container>
                 <v-alert dismissible v-model="showMsg" :color="colorMsg" outlined :type="typeMsg">
@@ -10,20 +10,20 @@
                 </v-alert>
                 <v-slide-y-transition mode="out-in">
                     <v-layout column align-start>
-                        <h1 class="display-1">Sekce administrace odkazů <br /><br /></h1>
+                        <h1 class="display-1">Sekce administrace kategorií <br /><br /></h1>
                         <v-form class="block" ref="entryForm">
                             <v-container>
                                 <v-flex>
-                                    <v-text-field label="Nadpis" placeholder="Nadpis" v-model="Odkaz.url"></v-text-field>
-                                    <v-text-field label="autor" placeholder="autor" v-model="Odkaz.text"></v-text-field>
-                                    <v-text-field label="Text" placeholder="Text" v-model="Odkaz.popis"></v-text-field>
-                                    <v-text-field label="Text" placeholder="Text" v-model="Odkaz.typOdkazu" type="number"></v-text-field>
-                                    <v-text-field label="Text" placeholder="Text" v-model="Odkaz.skupinaOdkazu"></v-text-field>
-                                    <v-text-field label="Text" placeholder="Text" v-model="Odkaz.blokOdkazu"></v-text-field>
-                                    <v-text-field label="Text" placeholder="Text" v-model="Odkaz.poradi" type="number"></v-text-field>
-                                    <v-checkbox v-model="Odkaz.zverejnit"></v-checkbox>pro prihlasene
-                                    <v-checkbox v-model="Odkaz.noveokno"></v-checkbox>pro prihlasene
-                                    <v-checkbox v-model="Odkaz.proPrihlasene"></v-checkbox>pro prihlasene
+                                    <v-text-field label="Nadpis"placeholder="Nadpis" v-model="Kategorie.nadpis"></v-text-field>
+                                    <v-text-field label="autor" placeholder="autor" v-model="Kategorie.autor"></v-text-field>
+                                    <v-text-field label="Text" placeholder="Text" v-model="Kategorie.text"></v-text-field>
+                                    <v-date-picker v-model="Kategorie.publikovanoDne"></v-date-picker>
+                                    <v-date-picker v-model="Kategorie.publikovanoDo"></v-date-picker>
+                                    <v-date-picker v-model="Kategorie.vytvorenoDne"></v-date-picker>
+                                    <v-checkbox v-model="Kategorie.proPrihlasene"></v-checkbox>pro prihlasene
+                                    <v-text-field label="Text" placeholder="Text" v-model="Kategorie.priloha"></v-text-field>
+                                    <v-text-field label="Text" placeholder="Text" v-model="Kategorie.poradi"></v-text-field>
+                                    <v-text-field type="number" label="Text" placeholder="Text" v-model="Kategorie.typClanku"></v-text-field>
                                 </v-flex>
                                 <v-flex>
                                     <v-btn color="success" type="button" text @click="submitForm">Odeslat</v-btn>
@@ -39,25 +39,26 @@
     `,
     data() {
         return {
-            text: 'Odkazy',
+            text: 'Kategorie',
             isEnable: false,
             colorMsg: 'red',
             typeMsg: 'success',
-            Odkaz: {
+            Kategorie: {
                 //id:'',
-                url: '',
+                nadpis: '',
                 text: '',
-                popis: '',
-                typOdkazu: '',
-                skupinaOdkazu: '',
-                blokOdkazu: '',
-                poradi: '',
-                zverejnit: false,
-                noveOkno: false,
+                autor: '',
+                publikovanoDne: '',
+                publikovanoDo: '',
+                vytvorenoDne: '',
                 proPrihlasene: false,
+                priloha: '',
+                poradi: '',
+                typClanku: null,
 
 
-            },
+            }
+            ,
             showMsg: false,
             resultMsg: '',
             dialog: false,
@@ -72,10 +73,10 @@
 
         },
         submitForm: function () {
+            console.log(this.Kategorie.text);
             let formData = new FormData();
-            if (this.Odkaz) {
-            
-                axios.post('/Common/Odkaz', this.Odkaz,
+            if (this.Kategorie) {
+                axios.post('/Common/Upload', this.Kategorie,
                     {
                         headers: {
                             'Content-Type': 'application/json'
@@ -101,6 +102,6 @@
         }
     },
     created() {
-        window.document.title = 'Odkazy form - Vue'
+        window.document.title = 'Kategorie form - Vue'
     }
 }

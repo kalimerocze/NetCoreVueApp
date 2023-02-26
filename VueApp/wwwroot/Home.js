@@ -26,7 +26,7 @@
                         <button @click='toggle'>Toggle Show / Hide Other text</button>
                         <br><br>
                         <h2 v-if='isEnable'>Pee nadpis !</h2>
-                        <v-btn to='/about'>O nás</v-btn>
+                        <v-btn to='/prehledClanku'>Clanky</v-btn>
                     </v-card>
                 </v-col>
                 <v-col cols="12" sm="6">
@@ -43,11 +43,11 @@
             <v-row no-gutters>
                 <v-col cols="12"sm="12">
                     <v-card class="pa-2" outlined tile>
-                        <h1>Třetí kartička Init{{text}}</h1>
+                        <h1> Přehled souborů v úložišti</h1>
                         <button @click='toggle'>Toggle Show / Hide Other text</button>
                         <br><br>
                         <h2 v-if='isEnable'>Pee nadpis !</h2>
-                        <v-btn to='/soubor'>Soubor</v-btn>
+                        <v-btn to='/prehledSouboru'>Soubory</v-btn>
                     </v-card>
                 </v-col>
             </v-row>

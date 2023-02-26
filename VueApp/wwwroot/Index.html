@@ -22,7 +22,7 @@
                     <v-toolbar-items>
                       
                         <v-btn text fill-height> <router-link style="text-decoration: none; color: inherit;" to="/home"><v-icon>mdi-home</v-icon>Domů </router-link></v-btn> &nbsp;
-                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/soubor"><v-icon>mdi-file</v-icon>Soubory </router-link></v-btn> &nbsp;
+                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/prehledSouboru"><v-icon>mdi-file</v-icon>Přehled souborů </router-link></v-btn> &nbsp;
                         <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/upload"><v-icon>mdi-upload</v-icon>Upload </router-link></v-btn>
                         <v-menu offset-y>
                             <template v-slot:activator="{ on, attrs }">
@@ -38,8 +38,8 @@
 
                                     <v-list-item-title>
                                         <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/odkazy"> <v-icon>mdi-link</v-icon>Administrace odkazů </router-link></v-btn> &nbsp;
-                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/clanky"> <v-icon>mdi-paper</v-icon>Administrace článků </router-link></v-btn> &nbsp;
-                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/upload">Uplaod</router-link></v-btn>
+                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/clanky"> <v-icon>mdi-laptop</v-icon>Administrace článků </router-link></v-btn> &nbsp;
+                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/kategorie"> <v-icon>mdi-book</v-icon>Kategorie</router-link></v-btn>
                                     </v-list-item-title>
                                 </v-list-item>
                             </v-list>
@@ -75,7 +75,10 @@
     <script src="Novinky.js"></script>
     <script src="Clanky.js"></script>
     <script src="Kontakt.js"></script>
+    <script src="Kategorie.js"></script>
     <script src="PrehledNovinek.js"></script>
+    <script src="PrehledSouboru.js"></script>
+    <script src="PrehledClanku.js"></script>
     <!-- Vue Pages -->
     <script>
         const Foo = { template: '<div>Stránka číslo 1</div>' }
@@ -92,7 +95,10 @@
             { path: '/soubor', component: Soubor },
             { path: '/novinky', component: Novinky },
             { path: '/odkazy', component: Odkazy },
+            { path: '/kategorie', component: Kategorie },
             { path: '/prehledNovinek', component: prehledNovinky },
+            { path: '/prehledSouboru', component: prehledSouboru },
+            { path: '/prehledClanku', component: prehledClanky },
             { path: '/*', component: Home }
             //{ path: '*', component: NotFound }
 

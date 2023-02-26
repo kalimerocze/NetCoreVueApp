@@ -1,6 +1,7 @@
-﻿const Kontakty = {
+﻿const prehledSouboru = {
     template: `
     <div>
+        <v-form ref="entryForm" id="form" name="idForm">
             <v-container>
                 <v-alert dismissible v-model="showMsg" :color="colorMsg" outlined :type="typeMsg">
                     <div d-flex justify-start>
@@ -9,66 +10,55 @@
                 </v-alert>
                 <v-slide-y-transition mode="out-in">
                     <v-layout column align-start>
-                        <h1 class="display-1">Přehled kontaktů <br /><br /></h1>
-                    
-                            <v-simple-table dense  style='width:100vw;'>
+                        <h1 class="display-1">Přehled souborů <br /><br /></h1>
+                                     <v-simple-table dense  style='width:100vw;'>
                      <thead>
       <tr>
         <th class="text-left">
           Id
         </th>
         <th class="text-left">
-          Jméno
+          Nadpis
         </th>
         <th class="text-left">
-          Přijmení
+          Url
         </th>
-        <th class="text-left">
-          Telefon
-        </th>
+        
       </tr>
     </thead>
     <tbody>
       <tr
-        v-for="(kontakt,i ) in kontakty"
+        v-for="(item,i ) in soubory"
         :key="i"
       >
-        <td>{{ kontakt.id }}</td>
-        <td>{{ kontakt.jmeno }}</td>
-        <td>{{ kontakt.prijmeni }}</td>
-        <td>{{ kontakt.telefon }}</td>
+        <td>{{ item.id }}</td>
+        <td>{{ item.nadpis }}</td>
+        <td>{{ item.url }}</td>
       </tr>
     </tbody>
   </v-simple-table >
-
-
                     </v-layout>
                 </v-slide-y-transition>
-                <v-btn type="button" @click="clear"> clear</v-btn>
+                <v-btn type="button" @click="clear"> clear </v-btn>
             </v-container>
+        </v-form>
     </div>
+
     `,
     data() {
         return {
-            text: 'Kontakty',
+            text: 'PrehledSouborů',
             isEnable: false,
             colorMsg: 'red',
             typeMsg: 'success',
-            kontakty: [
-                { id: 1, jmeno: 'Petr', prijmeni: 'Pavel', telefon :'444222111'},
-                { id: 2, jmeno: 'Marek', prijmeni: 'Novák', telefon: '444222111' },
-                { id: 3, jmeno: 'Radek', prijmeni: 'Novák', telefon: '444222111' },
-                { id: 4, jmeno: 'Kateřina', prijmeni: 'Nováková', telefon: '444222111' }
-        ],
-            Kontakt: {
-                id:'',
-                jmeno: '',
-                prijmeni: '',
-               telefon:''
+            soubory: [
+                { id: 1, nadpis: 'test.txt', url: 'http//:...' },
+                { id: 2, nadpis: 'tets1.txt', url: 'http//:...' },
+                { id: 3, nadpis: 'tets2.txt', url: 'http//:...' }
 
 
-            }
-            ,
+            ],
+
             showMsg: false,
             resultMsg: '',
             dialog: false,
@@ -79,14 +69,15 @@
             this.isEnable = !this.isEnable
         },
         clear() {
+            this.soubory = []
             this.$refs.entryForm.reset()
 
         },
         submitForm: function () {
-            console.log(this.Kontakt.text);
+            console.log(this.Soubor.text);
             let formData = new FormData();
-            if (this.Kontakt) {
-                axios.post('/Common/Upload', this.Kontakt,
+            if (this.Soubor) {
+                axios.post('/Common/Upload', this.Soubor,
                     {
                         headers: {
                             'Content-Type': 'application/json'
@@ -110,8 +101,9 @@
                 this.resultMsg = 'Nebyl zvolen žádný soubor!';
             }
         }
+
     },
     created() {
-        window.document.title = 'Kontakty form - Vue'
+        window.document.title = 'Prehled souborů form - Vue'
     }
 }
