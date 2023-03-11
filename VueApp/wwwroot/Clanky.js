@@ -33,11 +33,13 @@
                         </v-form>
                     </v-layout>
                 </v-slide-y-transition>
-                <v-btn type="button" @click="clear"> clear</v-btn>
+                <v-btn color='purple' style='color:white;' type="button" @click="clear"> clear</v-btn>
             </v-container>
         </v-form>
     </div>
     `,
+
+
     data() {
         return {
             text: 'Clanky',
@@ -77,7 +79,7 @@
             console.log(this.Clanek.text);
             let formData = new FormData();
             if (this.Clanek) {
-                axios.post('/Common/Upload', this.Clanek,
+                axios.post('/Clanek/Add', this.Clanek,
                     {
                         headers: {
                             'Content-Type': 'application/json'

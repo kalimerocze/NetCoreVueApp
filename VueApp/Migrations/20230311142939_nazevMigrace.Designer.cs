@@ -12,8 +12,8 @@ using VueApp.Context;
 namespace VueApp.Migrations
 {
     [DbContext(typeof(VueAppDbContext))]
-    [Migration("20221108193659_InitialDb")]
-    partial class InitialDb
+    [Migration("20230311142939_nazevMigrace")]
+    partial class nazevMigrace
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

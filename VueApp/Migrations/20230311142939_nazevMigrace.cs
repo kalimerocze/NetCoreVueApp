@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace VueApp.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialDb : Migration
+    public partial class nazevMigrace : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

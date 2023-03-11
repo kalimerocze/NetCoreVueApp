@@ -10,12 +10,20 @@
                 <v-slide-y-transition mode="out-in">
                     <v-layout column align-start>
                         <h1 class="display-1">Přehled článků <br /><br /></h1>
-                    <div v-for="(novinka,i ) in clanky"
-        :key="i">
+                    <div v-for="novinka in clanky"
+        :key="novinka.id">
                            <v-card width="400">
-      <h1>{{ novinka.id }}</h1>
+      <h1>{{ novinka.nadpis }}</h1>
 
-    <p> {{ novinka.telo }}</p>
+    <p> {{ novinka.text }}</p>
+<p> {{ novinka.text }}</p>
+<p> {{ novinka.autor }}</p>
+<p> {{ novinka.publikovanodo }}</p>
+<p> {{ novinka.publikovanodne }}</p>
+<p> {{ novinka.proprihlasene }}</p>
+<p> {{ novinka.priloha }}</p>
+<p> {{ novinka.poradi }}</p>
+<p> {{ novinka.typclanku }}</p>
 
     </v-card>
     </div>
@@ -25,7 +33,7 @@
 
                     </v-layout>
                 </v-slide-y-transition>
-                <v-btn type="button" @click="clear"> clear</v-btn>
+                <v-btn color='purple' style='color:white;' type="button" @click="clear"> clear</v-btn>
             </v-container>
     </div>
     `,
@@ -35,20 +43,28 @@
             isEnable: false,
             colorMsg: 'red',
             typeMsg: 'success',
-            clanky: [
-                { id: 1, nadpis: 'nadpis1', telo: 'clanek 1 '},
-                { id: 2, nadpis: 'nadpis 2 ', telo: 'clanek 2'},
-                { id: 3, nadpis: 'nadpis3 ', telo: 'clanek 3'}
-                
-              
-        ],
-           
-            
+        //    clanky: [
+        //        { id: 1, nadpis: 'nadpis1', text: 'clanek 1 '},
+        //        { id: 2, nadpis: 'nadpis 2 ', text: 'clanek 2'},
+        //        { id: 3, nadpis: 'nadpis3 ', text: 'clanek 3'}
+
+
+        //],
+
+
             showMsg: false,
             resultMsg: '',
             dialog: false,
         }
     },
+    props: {
+        // type check
+        height: Number,
+        // type check plus other validations
+        clanky: []
+    },
+
+
     methods: {
         toggle() {
             this.isEnable = !this.isEnable
@@ -57,36 +73,50 @@
             this.$refs.entryForm.reset()
 
         },
-        submitForm: function () {
-            console.log(this.Kontakt.text);
-            let formData = new FormData();
-            if (this.Kontakt) {
-                axios.post('/Common/Upload', this.Kontakt,
-                    {
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    }).then(function (response) {
-                        this.showMsg = true;
-                        this.colorMsg = 'green';
-                        this.typMsg = 'sucess';
-                        this.resultMsg = 'Upload proběhl úspěšně!';
-                    }).catch(function (error) {
-                        this.showMsg = true;
-                        this.colorMsg = 'red';
-                        this.typMsg = 'error';
-                        this.resultMsg = 'Nastala chyba!';
-                    })
-            }
-            else {
-                this.showMsg = true;
-                this.colorMsg = 'yellow';
-                this.typMsg = 'warning';
-                this.resultMsg = 'Nebyl zvolen žádný soubor!';
-            }
-        }
     },
     created() {
-        window.document.title = 'Kontakty form - Vue'
-    }
+        console.log('created')
+
+        window.document.title = 'Kontakty form - Vue';
+
+    },
+ 
+    mounted: function () {
+        console.log('mounted')
+     
+
+        axios.get('/Clanek/Prehled',
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(function (response) {
+                console.log(response)
+                
+                for (let i = 0; i < response.data.length; i++) {
+                    console.log(response.data[i]);
+                    //clanky.push(response.data[i]);
+                    //console.log(clanky)
+                    props.clanky.push(response.data[i])
+                    
+                }
+                console.log('test')
+                console.log(props.clanky)
+                console.log('test')
+                //console.log(prehledClanky)
+                this.showMsg = true;
+                this.colorMsg = 'green';
+                this.typMsg = 'sucess';
+                this.resultMsg = 'Upload proběhl úspěšně!';
+            }).catch(function (error) {
+                this.showMsg = true;
+                this.colorMsg = 'red';
+                this.typMsg = 'error';
+                this.resultMsg = 'Nastala chyba!';
+            })
+     
+    },
+    beforeCreate: function () {
+
+    },
 }

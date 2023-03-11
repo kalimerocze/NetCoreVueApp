@@ -14,6 +14,8 @@
         public string? Poradi { get; set; }
         public int TypClanku { get; set; }
 
+    
+
 
     }
 }

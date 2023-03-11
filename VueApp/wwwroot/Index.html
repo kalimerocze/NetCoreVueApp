@@ -11,7 +11,7 @@
     <div id="app">
         <v-app id="inspire">
             <v-layout row justify-center fill-height>
-                <v-toolbar dark color="green darken-1" class="hidden-xs-and-down">
+                <v-toolbar dark color="purple darken-1" class="hidden-xs-and-down">
                     <v-toolbar-items>
                         <v-btn text fill-height
                                @click="reloadPage()">
@@ -26,7 +26,7 @@
                         <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/upload"><v-icon>mdi-upload</v-icon>Upload </router-link></v-btn>
                         <v-menu offset-y>
                             <template v-slot:activator="{ on, attrs }">
-                                <v-btn color="green darken-1" v-ripple="false"
+                                <v-btn color="purple darken-1" v-ripple="false"
                                        dark
                                        v-bind="attrs"
                                        v-on="on">
@@ -56,7 +56,7 @@
                         <router-view></router-view>
                     </v-card>
                 </v-container>
-                <v-bottom-navigation background-color="green darken-1"
+                <v-bottom-navigation background-color="purple darken-1"
                                      dark>
                     <v-row justify="center" align="center"> &copy; 2022 - KalimeroCze</v-row>
                 </v-bottom-navigation>

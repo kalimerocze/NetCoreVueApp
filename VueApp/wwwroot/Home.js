@@ -10,7 +10,7 @@
                         <button @click='toggle'>Toggle Show / Hide Other text</button>
                         <br><br>
                         <h2 v-if='isEnable'>Pee nadpis !</h2>
-                        <v-btn to='/prehledNovinek'>Novinky</v-btn>
+                        <v-btn color='purple' style='color:white;'to='/prehledNovinek'>Novinky</v-btn>
                     </v-card>
                 </v-col>
             </v-row>
@@ -26,7 +26,7 @@
                         <button @click='toggle'>Toggle Show / Hide Other text</button>
                         <br><br>
                         <h2 v-if='isEnable'>Pee nadpis !</h2>
-                        <v-btn to='/prehledClanku'>Clanky</v-btn>
+                        <v-btn color='purple' style='color:white;' to='/prehledClanku'>Clanky</v-btn>
                     </v-card>
                 </v-col>
                 <v-col cols="12" sm="6">
@@ -35,7 +35,7 @@
                         <button @click='toggle'>Toggle Show / Hide Other text</button>
                         <br><br>
                         <h2 v-if='isEnable'>Pee nadpis !</h2>
-                        <v-btn to='/kontakt'>Kontakty</v-btn>
+                        <v-btn color='purple' style='color:white;' to='/kontakt'>Kontakty</v-btn>
                     </v-card>
                 </v-col>
             </v-row>
@@ -47,7 +47,7 @@
                         <button @click='toggle'>Toggle Show / Hide Other text</button>
                         <br><br>
                         <h2 v-if='isEnable'>Pee nadpis !</h2>
-                        <v-btn to='/prehledSouboru'>Soubory</v-btn>
+                        <v-btn color='purple' style='color:white;' to='/prehledSouboru'>Soubory</v-btn>
                     </v-card>
                 </v-col>
             </v-row>

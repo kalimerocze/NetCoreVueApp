@@ -39,7 +39,7 @@
   </v-simple-table >
                     </v-layout>
                 </v-slide-y-transition>
-                <v-btn type="button" @click="clear"> clear </v-btn>
+                <v-btn color='purple' style='color:white;' type="button" @click="clear"> clear </v-btn>
             </v-container>
         </v-form>
     </div>

@@ -27,13 +27,13 @@
                                     <v-text-field type="number" label="Text" placeholder="Text" v-model="Novinka.typClanku"></v-text-field>
                                 </v-flex>
                                 <v-flex>
-                                    <v-btn color="success" type="button" text @click="submitForm">Odeslat</v-btn>
+                                    <v-btn color='purple' style='color:white;' color="success" type="button" text @click="submitForm">Odeslat</v-btn>
                                 </v-flex>
                             </v-container>
                         </v-form>
                     </v-layout>
                 </v-slide-y-transition>
-                <v-btn type="button" @click="clear"> clear</v-btn>
+                <v-btn color='purple' style='color:white;' type="button" @click="clear"> clear</v-btn>
             </v-container>
         </v-form>
     </div>
