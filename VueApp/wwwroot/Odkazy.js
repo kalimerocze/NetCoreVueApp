@@ -75,7 +75,7 @@
             let formData = new FormData();
             if (this.Odkaz) {
             
-                axios.post('/Common/Odkaz', this.Odkaz,
+                axios.post('/Odkaz/Add', this.Odkaz,
                     {
                         headers: {
                             'Content-Type': 'application/json'

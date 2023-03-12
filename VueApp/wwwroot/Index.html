@@ -79,6 +79,7 @@
     <script src="PrehledNovinek.js"></script>
     <script src="PrehledSouboru.js"></script>
     <script src="PrehledClanku.js"></script>
+    <script src="PrehledOdkazu.js"></script>
     <!-- Vue Pages -->
     <script>
         const Foo = { template: '<div>Stránka číslo 1</div>' }
@@ -89,7 +90,12 @@
         const routes = [
             { path: '/home', component: Home },
             { path: '/upload', component: Upload },
-            { path: '/clanky', component: Clanky },
+            { path: '/clanky', component: Clanky, props: {
+                Clanky: {
+                        clanky: ['arr1', 'arr2']
+                }
+                }
+            },
           //  { path: '/bar', component: Home },
             { path: '/kontakt', component: Kontakty },
             { path: '/soubor', component: Soubor },
@@ -99,6 +105,7 @@
             { path: '/prehledNovinek', component: prehledNovinky },
             { path: '/prehledSouboru', component: prehledSouboru },
             { path: '/prehledClanku', component: prehledClanky },
+            { path: '/prehledOdkazu', component: prehledOdkazy },
             { path: '/*', component: Home }
             //{ path: '*', component: NotFound }
 

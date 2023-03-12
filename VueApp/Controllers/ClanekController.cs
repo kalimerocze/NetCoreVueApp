@@ -40,7 +40,7 @@ namespace VueApp.Controllers
                 var clanky = await vueAppDbContext.Clanek.ToListAsync();
 
 
-                return Ok(clanky.AsQueryable()) ;
+                return Ok(clanky.AsQueryable().ToArray()) ;
           
         }
 

@@ -1,7 +1,7 @@
 ﻿const Clanky = {
     template: `
     <div>
-        <v-form ref="entryForm" id="form" name="idForm">
+        <v-form  id="form" name="idForm">
             <v-container>
                 <v-alert dismissible v-model="showMsg" :color="colorMsg" outlined :type="typeMsg">
                     <div d-flex justify-start>
@@ -79,28 +79,39 @@
             console.log(this.Clanek.text);
             let formData = new FormData();
             if (this.Clanek) {
+                var self = this;
                 axios.post('/Clanek/Add', this.Clanek,
                     {
                         headers: {
                             'Content-Type': 'application/json'
                         }
                     }).then(function (response) {
-                        this.showMsg = true;
-                        this.colorMsg = 'green';
-                        this.typMsg = 'sucess';
-                        this.resultMsg = 'Upload proběhl úspěšně!';
+                        self.showMsg= true;
+                        self.colorMsg = 'green';
+                        self.typeMsg = 'success';
+                        self.resultMsg = 'Upload proběhl úspěšně!';
+                        console.log('uspech')
+
                     }).catch(function (error) {
-                        this.showMsg = true;
-                        this.colorMsg = 'red';
-                        this.typMsg = 'error';
-                        this.resultMsg = 'Nastala chyba!';
+                        self.showMsg = true;
+                        self.colorMsg = 'red';
+                        self.typeMsg = 'error';
+                        self.resultMsg = 'Nastala chyba!';
+                        console.log('chyba' + error)
+
                     })
+                this.$refs.entryForm.reset()
+                console.log('konec axiosu')
+
+
             }
             else {
                 this.showMsg = true;
                 this.colorMsg = 'yellow';
-                this.typMsg = 'warning';
+                this.typeMsg = 'warning';
                 this.resultMsg = 'Nebyl zvolen žádný soubor!';
+                console.log('nevyplneno')
+
             }
         }
     },

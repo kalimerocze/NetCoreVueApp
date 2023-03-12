@@ -1,4 +1,4 @@
-﻿const prehledClanky = {
+﻿const prehledOdkazy = {
     template: `
     <div>
             <v-container>
@@ -10,7 +10,7 @@
                 <v-slide-y-transition mode='out-in'>
                     <v-layout column align-start>
                         <h1 class='display-1'>Přehled článků <br /><br /></h1>
-                    <div  v-for='novinka in clanky'
+                    <div  v-for='novinka in odkazy'
         :key='novinka.id'>
                            <v-card width='400'>
       <h1>{{ novinka.nadpis }}</h1>
@@ -34,7 +34,7 @@
             isEnable: false,
             colorMsg: 'red',
             typeMsg: 'success',
-            clanky: [],
+            odkazy: [],
             resp:null,
             theArray:[],
 
@@ -57,12 +57,12 @@
             this.isEnable = !this.isEnable
         },
         clear() {
-            this.clanky = []
+            this.odkazy = []
         },
     },
     created() {
         console.log('created')
-        window.document.title = 'Prehled clanku form - Vue';
+        window.document.title = 'Prehled odkazů form - Vue';
         //this.clanky= [
         //        { 'id': '2a7c6470-8796-4a59-7e7b-08db223d9ced', 'nadpis': 'sdsssf', 'text': 'we', 'autor': 'e', 'publikovanoDne': '2023-03-08T00:00:00', 'publikovanoDo': '2023-03-17T00:00:00', 'vytvorenoDne': '2023-03-20T00:00:00', 'proPrihlasene': true, 'priloha': 'e', 'poradi': 'w', 'typClanku': 5 }
         //        , { 'id': '449b1c96-6284-4fde-7e7c-08db223d9ced', 'nadpis': 'sdf', 'text': 'we', 'autor': 'e', 'publikovanoDne': '2023-03-08T00:00:00', 'publikovanoDo': '2023-03-17T00:00:00', 'vytvorenoDne': '2023-03-20T00:00:00', 'proPrihlasene': true, 'priloha': 'e', 'poradi': 'w', 'typClanku': 5 }
@@ -76,7 +76,7 @@
         console.log('mounted')
 
         axios
-            .get(`/Clanek/Prehled`)
+            .get(`/Odkaz/Prehled`)
             .then(res => {
                 for (let i = 0; i < res.data.length; i++) {
 
@@ -85,7 +85,7 @@
                         nadpis: res.data[i].nadpis,
                         text: res.data[i].text,
                     };
-                this.clanky.push(newItem);
+                this.odkazy.push(newItem);
                 }
             })
 
