@@ -47,16 +47,9 @@
             typeMsg: 'success',
             Soubor: {
                 //id:'',
-                nadpis: '',
-                text: '',
-                autor: '',
-                publikovanoDne: '',
-                publikovanoDo: '',
-                vytvorenoDne: '',
-                proPrihlasene: false,
-                priloha: '',
-                poradi: '',
-                typClanku: null,
+                NazevSouboru: '',
+                clanekId: '',
+                slozkaSouboru: '',
 
 
             }

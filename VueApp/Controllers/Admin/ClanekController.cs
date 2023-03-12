@@ -72,7 +72,7 @@ namespace VueApp.Controllers
         }
 
         [ActionName("Delete")]
-        [HttpDelete("Delete")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
 

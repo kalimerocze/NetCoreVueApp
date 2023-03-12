@@ -32,23 +32,17 @@ namespace VueApp.Controllers
         }
         [ActionName("Upload")]
         [HttpPost("Upload")]
-        public async Task<IActionResult> Upload([FromBody] Clanek Clanek)
+        public async Task<IActionResult> Upload([FromBody] Soubor Clanek)
         {
             if (Clanek != null)
             {
-                await vueAppDbContext.Clanek.AddAsync(Clanek);
-                await vueAppDbContext.SaveChangesAsync();
+             
 
                 return Ok("done");
             }
             else { return BadRequest(); }
         }
 
-        [ActionName("Odkaz")]
-        [HttpPost("Odkaz")]
-        public IActionResult Odkaz([FromBody] Odkaz Odkaz)
-        {
-            return Ok("done");
-        }
+       
     }
 }

@@ -15,10 +15,10 @@
                         <v-form class="block" ref="entryForm">
                             <v-container>
                                 <v-flex>
-                                    <v-file-input show-size chips multiple label="Vyberte prosím soubor.." ref="formFiles" v-model="formFiles"></v-file-input>
+                                    <v-file-input show-size chips multiple label="Vyberte prosím soubor.."  v-model="formFiles"></v-file-input>
                                 </v-flex>
                                 <v-flex>
-                                    <v-btn color="success" type="button" text @click="submitFiles">Odeslat</v-btn>
+                                    <v-btn color="success" type="button" text @click="submitForm">Odeslat</v-btn>
                                 </v-flex>
                             </v-container>
                         </v-form>
@@ -31,11 +31,20 @@
     `,
     data() {
         return {
-            text: 'Upload',
+            text: 'Soubor',
             isEnable: false,
             colorMsg: 'red',
             typeMsg: 'success',
-            formFiles: null,
+            formFiles:null,
+            Soubor: {
+                //id:'',
+                NazevSouboru: '',
+                clanekId: '',
+                slozkaSouboru: '',
+
+
+            }
+            ,
             showMsg: false,
             resultMsg: '',
             dialog: false,
@@ -44,10 +53,45 @@
     methods: {
         toggle() {
             this.isEnable = !this.isEnable
+        },
+        clear() {
+            this.$refs.entryForm.reset()
+
+        },
+        submitForm: function () {
+            console.log(this.formFiles[0].name  );
+            let formData = new FormData();
+            this.Soubor.NazevSouboru = this.formFiles[0].name
+            if (this.formFiles) {
+                axios.post('/Common/Upload', this.Soubor,
+                    {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(function (response) {
+                        this.showMsg = true;
+                        this.colorMsg = 'green';
+                        this.typMsg = 'sucess';
+                        this.resultMsg = 'Upload proběhl úspěšně!';
+                        console.log('test')
+                    }).catch(function (error) {
+                        this.showMsg = true;
+                        this.colorMsg = 'red';
+                        this.typMsg = 'error';
+                        this.resultMsg = 'Nastala chyba!';
+                        console.log('test1')
+                    })
+            }
+            else {
+                this.showMsg = true;
+                this.colorMsg = 'yellow';
+                this.typMsg = 'warning';
+                this.resultMsg = 'Nebyl zvolen žádný soubor!';
+            }
         }
+
     },
     created() {
-    //nazevv tabu
-        window.document.title = 'Upload formulář - Vue'
+        window.document.title = 'Soubor form - Vue'
     }
 }

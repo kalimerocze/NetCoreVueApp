@@ -17,7 +17,7 @@
 
     <p> {{ novinka.text }}</p>
 <p> {{ novinka }}</p>
-
+<v-btn color='purple' style='color:white;' type='button' @click='addToCart($event, novinka.id)'> clear</v-btn>
 
     </v-card>
     </div>
@@ -59,6 +59,26 @@
         clear() {
             this.clanky = []
         },
+        addToCart: function (event, id) {
+            // use event here as well as id
+            console.log('In addToCart')
+            console.log(id)
+            axios
+                .delete(`/Clanek/Delete/`+id)
+                .then(res => {
+                //    for (let i = 0; i < res.data.length; i++) {
+
+                //        var newItem = {
+                //            id: res.data[i].id,
+                //            nadpis: res.data[i].nadpis,
+                //            text: res.data[i].text,
+                //        };
+                //        this.clanky.push(newItem);
+                //    }
+                })
+
+
+        }
     },
     created() {
         console.log('created')
