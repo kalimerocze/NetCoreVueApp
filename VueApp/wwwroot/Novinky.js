@@ -1,7 +1,7 @@
 ﻿const Novinky = {
     template: `
     <div>
-        <v-form ref="entryForm" id="form" name="idForm">
+        <v-form  id="form" name="idForm">
             <v-container>
                 <v-alert dismissible v-model="showMsg" :color="colorMsg" outlined :type="typeMsg">
                     <div d-flex justify-start>
@@ -27,7 +27,7 @@
                                     <v-text-field type="number" label="Text" placeholder="Text" v-model="Novinka.typClanku"></v-text-field>
                                 </v-flex>
                                 <v-flex>
-                                    <v-btn color='purple' style='color:white;' color="success" type="button" text @click="submitForm">Odeslat</v-btn>
+                                    <v-btn  style='color:white;' color="success" type="button" text @click="submitForm">Odeslat</v-btn>
                                 </v-flex>
                             </v-container>
                         </v-form>
@@ -77,22 +77,26 @@
             console.log(this.Novinka.text);
             let formData = new FormData();
             if (this.Novinka) {
-                axios.post('/Common/Upload', this.Novinka,
+                var self = this;
+
+                axios.post('/Novinka/Add', this.Novinka,
                     {
                         headers: {
                             'Content-Type': 'application/json'
                         }
                     }).then(function (response) {
-                        this.showMsg = true;
-                        this.colorMsg = 'green';
-                        this.typMsg = 'sucess';
-                        this.resultMsg = 'Upload proběhl úspěšně!';
+                        self.showMsg = true;
+                        self.colorMsg = 'green';
+                        self.typMsg = 'sucess';
+                        self.resultMsg = 'Upload proběhl úspěšně!';
                     }).catch(function (error) {
-                        this.showMsg = true;
-                        this.colorMsg = 'red';
-                        this.typMsg = 'error';
-                        this.resultMsg = 'Nastala chyba!';
+                        self.showMsg = true;
+                        self.colorMsg = 'red';
+                        self.typMsg = 'error';
+                        self.resultMsg = 'Nastala chyba!';
                     })
+                this.$refs.entryForm.reset()
+
             }
             else {
                 this.showMsg = true;

@@ -37,6 +37,8 @@
                                 <v-list-item>
 
                                     <v-list-item-title>
+                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/novinky"> <v-icon>mdi-link</v-icon>Administrace novinek </router-link></v-btn> &nbsp;
+
                                         <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/odkazy"> <v-icon>mdi-link</v-icon>Administrace odkazů </router-link></v-btn> &nbsp;
                                         <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/clanky"> <v-icon>mdi-laptop</v-icon>Administrace článků </router-link></v-btn> &nbsp;
                                         <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/kategorie"> <v-icon>mdi-book</v-icon>Kategorie</router-link></v-btn>
@@ -80,6 +82,7 @@
     <script src="PrehledSouboru.js"></script>
     <script src="PrehledClanku.js"></script>
     <script src="PrehledOdkazu.js"></script>
+    <script src="ClankyMainPage.js"></script>
     <!-- Vue Pages -->
     <script>
         const Foo = { template: '<div>Stránka číslo 1</div>' }
@@ -106,6 +109,7 @@
             { path: '/prehledSouboru', component: prehledSouboru },
             { path: '/prehledClanku', component: prehledClanky },
             { path: '/prehledOdkazu', component: prehledOdkazy },
+            { path: '/clankyMainPage', component: prehledOdkazy },
             { path: '/*', component: Home }
             //{ path: '*', component: NotFound }
 

@@ -1,7 +1,7 @@
 ﻿const Kategorie = {
     template: `
     <div>
-        <v-form ref="entryForm" id="form" name="idForm">
+        <v-form  id="form" name="idForm">
             <v-container>
                 <v-alert dismissible v-model="showMsg" :color="colorMsg" outlined :type="typeMsg">
                     <div d-flex justify-start>
@@ -14,16 +14,8 @@
                         <v-form class="block" ref="entryForm">
                             <v-container>
                                 <v-flex>
-                                    <v-text-field label="Nadpis"placeholder="Nadpis" v-model="Kategorie.nadpis"></v-text-field>
-                                    <v-text-field label="autor" placeholder="autor" v-model="Kategorie.autor"></v-text-field>
-                                    <v-text-field label="Text" placeholder="Text" v-model="Kategorie.text"></v-text-field>
-                                    <v-date-picker v-model="Kategorie.publikovanoDne"></v-date-picker>
-                                    <v-date-picker v-model="Kategorie.publikovanoDo"></v-date-picker>
-                                    <v-date-picker v-model="Kategorie.vytvorenoDne"></v-date-picker>
-                                    <v-checkbox v-model="Kategorie.proPrihlasene"></v-checkbox>pro prihlasene
-                                    <v-text-field label="Text" placeholder="Text" v-model="Kategorie.priloha"></v-text-field>
-                                    <v-text-field label="Text" placeholder="Text" v-model="Kategorie.poradi"></v-text-field>
-                                    <v-text-field type="number" label="Text" placeholder="Text" v-model="Kategorie.typClanku"></v-text-field>
+                                    <v-text-field label="popis"placeholder="Nadpis" v-model="Kategorie.nadpis"></v-text-field>
+                                    <v-text-field label="popis" placeholder="popis" v-model="Kategorie.popis"></v-text-field>
                                 </v-flex>
                                 <v-flex>
                                     <v-btn  color="success" type="button" text @click="submitForm">Odeslat</v-btn>
@@ -46,16 +38,8 @@
             Kategorie: {
                 //id:'',
                 nadpis: '',
-                text: '',
-                autor: '',
-                publikovanoDne: '',
-                publikovanoDo: '',
-                vytvorenoDne: '',
-                proPrihlasene: false,
-                priloha: '',
-                poradi: '',
-                typClanku: null,
-
+                popis: '',
+                
 
             }
             ,
@@ -76,22 +60,26 @@
             console.log(this.Kategorie.text);
             let formData = new FormData();
             if (this.Kategorie) {
-                axios.post('/Common/Upload', this.Kategorie,
+                var self = this;
+
+                axios.post('/Kategorie/Add', this.Kategorie,
                     {
                         headers: {
                             'Content-Type': 'application/json'
                         }
                     }).then(function (response) {
-                        this.showMsg = true;
-                        this.colorMsg = 'green';
-                        this.typMsg = 'sucess';
-                        this.resultMsg = 'Upload proběhl úspěšně!';
+                        self.showMsg = true;
+                        self.colorMsg = 'green';
+                        self.typMsg = 'sucess';
+                        self.resultMsg = 'Upload proběhl úspěšně!';
                     }).catch(function (error) {
-                        this.showMsg = true;
-                        this.colorMsg = 'red';
-                        this.typMsg = 'error';
-                        this.resultMsg = 'Nastala chyba!';
+                        self.showMsg = true;
+                        self.colorMsg = 'red';
+                        self.typMsg = 'error';
+                        self.resultMsg = 'Nastala chyba!';
                     })
+                this.$refs.entryForm.reset()
+
             }
             else {
                 this.showMsg = true;

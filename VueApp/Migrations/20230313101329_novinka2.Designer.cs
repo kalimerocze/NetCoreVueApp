@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VueApp.Context;
 
@@ -11,9 +12,11 @@ using VueApp.Context;
 namespace VueApp.Migrations
 {
     [DbContext(typeof(VueAppDbContext))]
-    partial class VueAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230313101329_novinka2")]
+    partial class novinka2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,44 +78,6 @@ namespace VueApp.Migrations
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistorieClanek");
-                                ttb
-                                    .HasPeriodStart("PlatneOd")
-                                    .HasColumnName("PlatneOd");
-                                ttb
-                                    .HasPeriodEnd("PlatneDo")
-                                    .HasColumnName("PlatneDo");
-                            }));
-                });
-
-            modelBuilder.Entity("VueApp.Models.Kategorie", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Nadpis")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("PlatneDo")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasColumnName("PlatneDo");
-
-                    b.Property<DateTime>("PlatneOd")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasColumnName("PlatneOd");
-
-                    b.Property<string>("Popis")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Kategorie", (string)null);
-
-                    b.ToTable(tb => tb.IsTemporal(ttb =>
-                            {
-                                ttb.UseHistoryTable("HistorieKategorie");
                                 ttb
                                     .HasPeriodStart("PlatneOd")
                                     .HasColumnName("PlatneOd");

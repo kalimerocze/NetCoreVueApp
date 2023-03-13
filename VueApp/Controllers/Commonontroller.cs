@@ -12,13 +12,14 @@ namespace VueApp.Controllers
 
         private readonly IConfiguration config;
         private readonly VueAppDbContext vueAppDbContext;
-
+        private IWebHostEnvironment _hostingEnvironment;
         private readonly ILogger<HomeController> _log;
         private IOptions<AppSettingsModel> settings;
 
 
-        public CommonController(IConfiguration options, VueAppDbContext vueAppDbContext, ILogger<HomeController> log, IOptions<AppSettingsModel> settings)
+        public CommonController(IConfiguration options, VueAppDbContext vueAppDbContext, ILogger<HomeController> log, IOptions<AppSettingsModel> settings, IWebHostEnvironment environment)
         {
+            _hostingEnvironment = environment;
             this.settings = settings;
             _log = log;
             config = options;
@@ -32,11 +33,23 @@ namespace VueApp.Controllers
         }
         [ActionName("Upload")]
         [HttpPost("Upload")]
-        public async Task<IActionResult> Upload([FromBody] Soubor Clanek)
+        public async Task<IActionResult> Upload(IFormFile file)
         {
-            if (Clanek != null)
+
+
+            if (file != null)
             {
-             
+                string uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+               
+                    if (file.Length > 0)
+                    {
+                        string filePath = Path.Combine(uploads, file.FileName);
+                        using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(fileStream);
+                        }
+                    }
+        
 
                 return Ok("done");
             }

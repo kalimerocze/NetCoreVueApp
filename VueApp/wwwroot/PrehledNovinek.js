@@ -10,17 +10,19 @@
                 <v-slide-y-transition mode="out-in">
                     <v-layout column align-start>
                         <h1 class="display-1">Přehled novinek <br /><br /></h1>
-                    <div v-for="(novinka,i ) in novinky"
-        :key="i">
+                   <div  v-for='novinka in novinky'
+        :key='novinka.id'>
                            <v-card width="400">
-      <h1>{{ novinka.id }}</h1>
+      <h1>{{ novinka.nadpis }}</h1>
 
-    <p> {{ novinka.telo }}</p>
+    <p> {{ novinka.text }}</p>
+<v-btn color='purple' style='color:white;' type='button' @click='deleteItem($event, novinka.id)'> clear</v-btn>
+
 
     </v-card>
     </div>
 
-              
+             
 
 
                     </v-layout>
@@ -36,9 +38,9 @@
             colorMsg: 'red',
             typeMsg: 'success',
             novinky: [
-                { id: 1, nadpis: 'Marek', telo: 'Novák'},
-                { id: 2, nadpis: 'Marek', telo: 'Novák'},
-                { id: 3, nadpis: 'Marek', telo: 'Novák'}
+                //{ id: 1, nadpis: 'Marek', telo: 'Novák'},
+                //{ id: 2, nadpis: 'Marek', telo: 'Novák'},
+                //{ id: 3, nadpis: 'Marek', telo: 'Novák'}
                 
               
         ],
@@ -57,36 +59,56 @@
             this.$refs.entryForm.reset()
 
         },
-        submitForm: function () {
-            console.log(this.Kontakt.text);
-            let formData = new FormData();
-            if (this.Kontakt) {
-                axios.post('/Common/Upload', this.Kontakt,
-                    {
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    }).then(function (response) {
-                        this.showMsg = true;
-                        this.colorMsg = 'green';
-                        this.typMsg = 'sucess';
-                        this.resultMsg = 'Upload proběhl úspěšně!';
-                    }).catch(function (error) {
-                        this.showMsg = true;
-                        this.colorMsg = 'red';
-                        this.typMsg = 'error';
-                        this.resultMsg = 'Nastala chyba!';
-                    })
-            }
-            else {
-                this.showMsg = true;
-                this.colorMsg = 'yellow';
-                this.typMsg = 'warning';
-                this.resultMsg = 'Nebyl zvolen žádný soubor!';
-            }
+        deleteItem: function (event, id) {
+            // use event here as well as id
+            console.log(id)
+            axios
+                .delete(`/Novinka/Delete/` + id)
+                .then(res => {
+                    //    for (let i = 0; i < res.data.length; i++) {
+
+                    //        var newItem = {
+                    //            id: res.data[i].id,
+                    //            nadpis: res.data[i].nadpis,
+                    //            text: res.data[i].text,
+                    //        };
+                    //        this.clanky.push(newItem);
+                    //    }
+                })
+
+
         }
+
+    
     },
+
+
     created() {
         window.document.title = 'Kontakty form - Vue'
-    }
+    },
+        mounted() {
+
+        console.log('mounted')
+
+        axios
+            .get(`/Novinka/Prehled`)
+            .then(res => {
+                for (let i = 0; i < res.data.length; i++) {
+
+                    var newItem = {
+                        id: res.data[i].id,
+                        nadpis: res.data[i].nadpis,
+                        text: res.data[i].text,
+                    };
+                    this.novinky.push(newItem);
+                }
+            })
+
+
+
+
+
+
+    },
+
 }
