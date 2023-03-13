@@ -34,14 +34,26 @@
                                 </v-btn>
                             </template>
                             <v-list>
+
                                 <v-list-item>
 
                                     <v-list-item-title>
                                         <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/novinky"> <v-icon>mdi-link</v-icon>Administrace novinek </router-link></v-btn> &nbsp;
+                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/kontakt"> <v-icon>mdi-link</v-icon>Administrace kontaktu </router-link></v-btn> &nbsp;
 
                                         <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/odkazy"> <v-icon>mdi-link</v-icon>Administrace odkazů </router-link></v-btn> &nbsp;
                                         <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/clanky"> <v-icon>mdi-laptop</v-icon>Administrace článků </router-link></v-btn> &nbsp;
                                         <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/kategorie"> <v-icon>mdi-book</v-icon>Kategorie</router-link></v-btn>
+                                    </v-list-item-title>
+                                </v-list-item>
+                            </v-list>
+                            <v-list>
+
+                                <v-list-item>
+
+                                    <v-list-item-title>
+                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/prehledKontaktu"> <v-icon>mdi-link</v-icon>prehledKontaktu </router-link></v-btn> &nbsp;
+                                      
                                     </v-list-item-title>
                                 </v-list-item>
                             </v-list>
@@ -73,16 +85,17 @@
     <script src="home.js"></script>
     <script src="Upload.js"></script>
     <script src="Soubor.js"></script>
-    <script src="Odkazy.js"></script>
-    <script src="Novinky.js"></script>
-    <script src="Clanky.js"></script>
-    <script src="Kontakt.js"></script>
-    <script src="Kategorie.js"></script>
-    <script src="PrehledNovinek.js"></script>
-    <script src="PrehledSouboru.js"></script>
-    <script src="PrehledClanku.js"></script>
-    <script src="PrehledOdkazu.js"></script>
+    <script src="/Admin/Odkazy.js"></script>
+    <script src="/Admin/Novinky.js"></script>
+    <script src="/Admin/Clanky.js"></script>
+    <script src="/Admin/Kontakt.js"></script>
+    <script src="/Admin/Kategorie.js"></script>
+    <script src="/Admin/PrehledNovinek.js"></script>
+    <script src="/Admin/PrehledSouboru.js"></script>
+    <script src="/Admin/PrehledClanku.js"></script>
+    <script src="/Admin/PrehledOdkazu.js"></script>
     <script src="ClankyMainPage.js"></script>
+    <script src="/Admin/KontaktyPrehled.js"></script>
     <!-- Vue Pages -->
     <script>
         const Foo = { template: '<div>Stránka číslo 1</div>' }
@@ -107,6 +120,7 @@
             { path: '/kategorie', component: Kategorie },
             { path: '/prehledNovinek', component: prehledNovinky },
             { path: '/prehledSouboru', component: prehledSouboru },
+            { path: '/prehledKontaktu', component: prehledKontaktu },
             { path: '/prehledClanku', component: prehledClanky },
             { path: '/prehledOdkazu', component: prehledOdkazy },
             { path: '/clankyMainPage', component: prehledOdkazy },

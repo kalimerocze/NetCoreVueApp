@@ -1,6 +1,7 @@
 ﻿const Kontakty = {
     template: `
     <div>
+        <v-form  id="form" name="idForm">
             <v-container>
                 <v-alert dismissible v-model="showMsg" :color="colorMsg" outlined :type="typeMsg">
                     <div d-flex justify-start>
@@ -9,43 +10,27 @@
                 </v-alert>
                 <v-slide-y-transition mode="out-in">
                     <v-layout column align-start>
-                        <h1 class="display-1">Přehled kontaktů <br /><br /></h1>
-                    
-                            <v-simple-table dense  style='width:100vw;'>
-                     <thead>
-      <tr>
-        <th class="text-left">
-          Id
-        </th>
-        <th class="text-left">
-          Jméno
-        </th>
-        <th class="text-left">
-          Přijmení
-        </th>
-        <th class="text-left">
-          Telefon
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="(kontakt,i ) in kontakty"
-        :key="i"
-      >
-        <td>{{ kontakt.id }}</td>
-        <td>{{ kontakt.jmeno }}</td>
-        <td>{{ kontakt.prijmeni }}</td>
-        <td>{{ kontakt.telefon }}</td>
-      </tr>
-    </tbody>
-  </v-simple-table >
-
-
+                        <h1 class="display-1">Sekce  Kontaktů <br /><br /></h1>
+                        Administrace novinek
+                        <v-form class="block" ref="entryForm">
+                            <v-container>
+                                <v-flex>
+                                    <v-text-field label="Jmeno"placeholder="Jméno" v-model="Kontakt.Jmeno"></v-text-field>
+                                    <v-text-field label="prijmeni" placeholder="autor" v-model="Kontakt.prijmeni"></v-text-field>
+                                    <v-text-field label="telefon" placeholder="Text" v-model="Kontakt.telefon"></v-text-field>
+                                    <v-checkbox v-model="Kontakt.aktivni"></v-checkbox>aktivni
+                                    <v-text-field label="mesto" placeholder="Text" v-model="Kontakt.mesto"></v-text-field>
+                                </v-flex>
+                                <v-flex>
+                                    <v-btn  style='color:white;' color="success" type="button" text @click="submitForm">Odeslat</v-btn>
+                                </v-flex>
+                            </v-container>
+                        </v-form>
                     </v-layout>
                 </v-slide-y-transition>
                 <v-btn color='purple' style='color:white;' type="button" @click="clear"> clear</v-btn>
             </v-container>
+        </v-form>
     </div>
     `,
     data() {
@@ -61,10 +46,12 @@
                 { id: 4, jmeno: 'Kateřina', prijmeni: 'Nováková', telefon: '444222111' }
         ],
             Kontakt: {
-                id:'',
+                //id:'',
                 jmeno: '',
                 prijmeni: '',
-               telefon:''
+               telefon:'',
+               mesto:'',
+               aktivni:true,
 
 
             }
@@ -83,25 +70,27 @@
 
         },
         submitForm: function () {
-            console.log(this.Kontakt.text);
+            var self = this;
+
             let formData = new FormData();
             if (this.Kontakt) {
-                axios.post('/Common/Upload', this.Kontakt,
+                axios.post('/Kontakt/Add', this.Kontakt,
                     {
                         headers: {
                             'Content-Type': 'application/json'
                         }
                     }).then(function (response) {
-                        this.showMsg = true;
-                        this.colorMsg = 'green';
-                        this.typMsg = 'sucess';
-                        this.resultMsg = 'Upload proběhl úspěšně!';
+                        self.showMsg = true;
+                        self.colorMsg = 'green';
+                        self.typMsg = 'sucess';
+                        self.resultMsg = 'Upload proběhl úspěšně!';
                     }).catch(function (error) {
-                        this.showMsg = true;
-                        this.colorMsg = 'red';
-                        this.typMsg = 'error';
-                        this.resultMsg = 'Nastala chyba!';
+                        self.showMsg = true;
+                        self.colorMsg = 'red';
+                        self.typMsg = 'error';
+                        self.resultMsg = 'Nastala chyba!';
                     })
+                this.$refs.entryForm.reset()
             }
             else {
                 this.showMsg = true;

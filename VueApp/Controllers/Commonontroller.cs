@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using VueApp.Context;
 using VueApp.Models;
@@ -35,7 +36,11 @@ namespace VueApp.Controllers
         [HttpPost("Upload")]
         public async Task<IActionResult> Upload(IFormFile file)
         {
-
+            Soubor s = new Soubor() { NazevSouboru = file.FileName,
+                SlozkaSouboru = "uploads"
+        };
+          await  vueAppDbContext.Soubor.AddAsync(s);
+           await vueAppDbContext.SaveChangesAsync();
 
             if (file != null)
             {
@@ -55,7 +60,50 @@ namespace VueApp.Controllers
             }
             else { return BadRequest(); }
         }
+        [ActionName("Soubory")]
+        [HttpGet("Soubory")]
+        public async Task<IActionResult> Soubory()
+        {
 
-       
+            var soubory = await vueAppDbContext.Soubor.ToListAsync();
+
+
+            return Ok(soubory.AsQueryable());
+
+        }
+
+            static readonly string rootFolder = @"~/uploads";
+        [ActionName("DeleteSoubor")]
+        [HttpDelete("DeleteSoubor/{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var soubor = await vueAppDbContext.Soubor.FindAsync(id);
+            try
+            {
+                var test = Path.Combine(_hostingEnvironment.WebRootPath, "uploads", soubor.NazevSouboru);
+
+                // Check if file exists with its full path    
+                if (System.IO.File.Exists(Path.Combine(_hostingEnvironment.WebRootPath,"uploads", soubor.NazevSouboru)))
+                {
+                    // If file found, delete it    
+                    System.IO.File.Delete(Path.Combine(_hostingEnvironment.WebRootPath, "uploads", soubor.NazevSouboru));
+                    Console.WriteLine("File deleted.");
+                }
+                else Console.WriteLine("File not found");
+            }
+            catch (IOException ioExp)
+            {
+                Console.WriteLine(ioExp.Message);
+            }
+
+            vueAppDbContext.Soubor.Remove(soubor);
+            await vueAppDbContext.SaveChangesAsync();
+
+
+            return Ok();
+
+        }
+
+
     }
 }

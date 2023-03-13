@@ -16,6 +16,17 @@ namespace VueApp.Context
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Kontakt>().ToTable("Kontakt", c =>
+            {
+                c.IsTemporal(o =>
+                {
+                    o.UseHistoryTable("HistorieKontakt");
+                    o.HasPeriodStart("PlatneOd");
+                    o.HasPeriodEnd("PlatneDo");
+
+                });
+
+            });
             modelBuilder.Entity<Novinka>().ToTable("Novinka", c =>
             {
                 c.IsTemporal(o =>
@@ -98,6 +109,7 @@ namespace VueApp.Context
         public DbSet<Clanek>? Clanek { get; set; }
         public DbSet<Odkaz>? Odkaz { get; set; }
         public DbSet<Soubor>? Soubor { get; set; }
+        public DbSet<Kontakt>? Kontakt { get; set; }
         public DbSet<Novinka>? Novinka { get; set; }
         public DbSet<Kategorie>? Kategorie { get; set; }
         public DbSet<TypClanku>? TypClanku { get; set; }
