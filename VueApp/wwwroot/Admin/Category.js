@@ -1,4 +1,4 @@
-﻿const Kontakty = {
+﻿const Category = {
     template: `
     <div>
         <v-form  id="form" name="idForm">
@@ -10,49 +10,36 @@
                 </v-alert>
                 <v-slide-y-transition mode="out-in">
                     <v-layout column align-start>
-                        <h1 class="display-1">Sekce  Kontaktů <br /><br /></h1>
-                        Administrace novinek
+                        <h1 class="display-1">Category administration <br /><br /></h1>
                         <v-form class="block" ref="entryForm">
                             <v-container>
                                 <v-flex>
-                                    <v-text-field label="Jmeno"placeholder="Jméno" v-model="Kontakt.Jmeno"></v-text-field>
-                                    <v-text-field label="prijmeni" placeholder="autor" v-model="Kontakt.prijmeni"></v-text-field>
-                                    <v-text-field label="telefon" placeholder="Text" v-model="Kontakt.telefon"></v-text-field>
-                                    <v-checkbox v-model="Kontakt.aktivni"></v-checkbox>aktivni
-                                    <v-text-field label="mesto" placeholder="Text" v-model="Kontakt.mesto"></v-text-field>
+                                    <v-text-field label="Title"placeholder="Title" v-model="Category.title"></v-text-field>
+                                    <v-text-field label="Description" placeholder="Description" v-model="Category.description"></v-text-field>
                                 </v-flex>
                                 <v-flex>
-                                    <v-btn  style='color:white;' color="success" type="button" text @click="submitForm">Odeslat</v-btn>
+                                    <v-btn  color="success" type="button" text @click="submitForm">Submit form</v-btn>
+                                    <v-btn color='purple' style='color:white;' type="button" text @click="clear"> Clear form</v-btn>
                                 </v-flex>
                             </v-container>
                         </v-form>
                     </v-layout>
                 </v-slide-y-transition>
-                <v-btn color='purple' style='color:white;' type="button" @click="clear"> clear</v-btn>
             </v-container>
         </v-form>
     </div>
     `,
     data() {
         return {
-            text: 'Kontakty',
+            text: 'Category',
             isEnable: false,
             colorMsg: 'red',
             typeMsg: 'success',
-            kontakty: [
-                { id: 1, jmeno: 'Petr', prijmeni: 'Pavel', telefon :'444222111'},
-                { id: 2, jmeno: 'Marek', prijmeni: 'Novák', telefon: '444222111' },
-                { id: 3, jmeno: 'Radek', prijmeni: 'Novák', telefon: '444222111' },
-                { id: 4, jmeno: 'Kateřina', prijmeni: 'Nováková', telefon: '444222111' }
-        ],
-            Kontakt: {
+            Category: {
                 //id:'',
-                jmeno: '',
-                prijmeni: '',
-               telefon:'',
-               mesto:'',
-               aktivni:true,
-
+                title: '',
+                description: '',
+                
 
             }
             ,
@@ -70,11 +57,11 @@
 
         },
         submitForm: function () {
-            var self = this;
-
             let formData = new FormData();
-            if (this.Kontakt) {
-                axios.post('/Kontakt/Add', this.Kontakt,
+            if (this.Category) {
+                var self = this;
+
+                axios.post('/Category/Add', this.Category,
                     {
                         headers: {
                             'Content-Type': 'application/json'
@@ -83,24 +70,25 @@
                         self.showMsg = true;
                         self.colorMsg = 'green';
                         self.typMsg = 'sucess';
-                        self.resultMsg = 'Upload proběhl úspěšně!';
+                        self.resultMsg = 'Uplaod successful!';
                     }).catch(function (error) {
                         self.showMsg = true;
                         self.colorMsg = 'red';
                         self.typMsg = 'error';
-                        self.resultMsg = 'Nastala chyba!';
+                        self.resultMsg = 'An error has occurred!';
                     })
                 this.$refs.entryForm.reset()
+
             }
             else {
                 this.showMsg = true;
                 this.colorMsg = 'yellow';
                 this.typMsg = 'warning';
-                this.resultMsg = 'Nebyl zvolen žádný soubor!';
+                this.resultMsg = 'Not selected any file!';
             }
         }
     },
     created() {
-        window.document.title = 'Kontakty form - Vue'
+        window.document.title = 'Category form - Vue'
     }
 }

@@ -80,7 +80,7 @@
             //this.Soubor.NazevSouboru = this.formFiles[0].name
             console.log(self.Images );
             if (self.Images) {
-                axios.post('/Common/Upload', formData,
+                axios.post('/File/Upload', formData,
                     {
                         //headers: {
                         //    'Content-Type': 'multipart/form-data' 

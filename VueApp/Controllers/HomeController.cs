@@ -8,23 +8,24 @@ namespace VueApp.Controllers
     {
 
         //private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IConfiguration config;
+        private readonly IConfiguration _config;
         public HomeController(IConfiguration options)
         {
-            config = options;
-
+            _config = options;
         }
+
         [ActionName("Api")]
         [HttpGet("Api")]
         public IActionResult Api()
         {
             return Ok("test");
         }
+
         [ActionName("Upload")]
         [HttpPost("Upload")]
         public IActionResult Upload(IFormFile formFiles)
         {
-            return Ok();
+            return Ok(StatusCodes.Status200OK);
         }
 
         /// <summary>

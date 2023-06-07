@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System;
 using VueApp.Context;
 using VueApp.Models;
 
@@ -8,7 +9,7 @@ namespace VueApp.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CommonController : ControllerBase
+    public class FileController : ControllerBase
     {
 
         private readonly IConfiguration _config;
@@ -18,7 +19,7 @@ namespace VueApp.Controllers
         private IOptions<AppSettingsModel> _settings;
 
 
-        public CommonController(IConfiguration options, VueAppDbContext vueAppDbContext, ILogger<HomeController> log, IOptions<AppSettingsModel> settings, IWebHostEnvironment environment)
+        public FileController(IConfiguration options, VueAppDbContext vueAppDbContext, ILogger<HomeController> log, IOptions<AppSettingsModel> settings, IWebHostEnvironment environment)
         {
             _hostingEnvironment = environment;
             _settings = settings;
@@ -27,12 +28,7 @@ namespace VueApp.Controllers
             _vueAppDbContext = vueAppDbContext;
         }
 
-        [ActionName("Api")]
-        [HttpGet("Api")]
-        public IActionResult Api()
-        {
-            return Ok("test");
-        }
+
 
         [ActionName("Upload")]
         [HttpPost("Upload")]
@@ -43,7 +39,6 @@ namespace VueApp.Controllers
                 FileName = file.FileName,
                 Folder = "uploads"
             };
-
             if (_vueAppDbContext.File == null)
             {
                 return BadRequest(StatusCodes.Status400BadRequest);
@@ -71,8 +66,8 @@ namespace VueApp.Controllers
                 return BadRequest(StatusCodes.Status400BadRequest);
             }
         }
-        [ActionName("Files")]
-        [HttpGet("Files")]
+        [ActionName("GetFiles")]
+        [HttpGet("GetFiles")]
         public async Task<IActionResult> GetFiles()
         {
             if (_vueAppDbContext.File == null)
@@ -84,7 +79,7 @@ namespace VueApp.Controllers
             return Ok(files.AsQueryable());
         }
 
-        // static readonly string rootFolder = @"~/uploads";
+        //static readonly string rootFolder = @"~/uploads";
         [ActionName("DeleteFile")]
         [HttpDelete("DeleteFile/{id}")]
         public async Task<IActionResult> Delete(Guid id)
@@ -93,12 +88,10 @@ namespace VueApp.Controllers
             {
                 return BadRequest(StatusCodes.Status400BadRequest);
             }
-
             var file = await _vueAppDbContext.File.FindAsync(id);
-            if (file == null || file.FileName == null || file.FileName == "") { return BadRequest(); }
             try
             {
-
+                if (file == null || file.FileName == null || file.FileName == "") { return BadRequest(); }
                 var test = Path.Combine(_hostingEnvironment.WebRootPath, "uploads", file.FileName);
 
                 // Check if file exists with its full path    
@@ -108,10 +101,7 @@ namespace VueApp.Controllers
                     System.IO.File.Delete(Path.Combine(_hostingEnvironment.WebRootPath, "uploads", file.FileName));
                     Console.WriteLine("File deleted.");
                 }
-                else
-                {
-                    Console.WriteLine("File not found");
-                }
+                else Console.WriteLine("File not found");
             }
             catch (IOException ioExp)
             {
@@ -121,7 +111,7 @@ namespace VueApp.Controllers
             _vueAppDbContext.File.Remove(file);
             await _vueAppDbContext.SaveChangesAsync();
 
-            return Ok(StatusCodes.Status200OK);
+            return Ok();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿const prehledOdkazy = {
+﻿const LinksSummary = {
     template: `
     <div>
             <v-container>
@@ -9,14 +9,14 @@
                 </v-alert>
                 <v-slide-y-transition mode='out-in'>
                     <v-layout column align-start>
-                        <h1 class='display-1'>Přehled článků <br /><br /></h1>
-                    <div  v-for='novinka in odkazy'
-        :key='novinka.id'>
+                        <h1 class='display-1'>Links summary<br /><br /></h1>
+                    <div  v-for='link in links'
+        :key='link.id'>
                            <v-card width='400'>
-      <h1>{{ novinka.nadpis }}</h1>
+      <h1>{{ link.nadpis }}</h1>
 
-    <p> {{ novinka.text }}</p>
-<p> {{ novinka }}</p>
+    <p> {{ link.text }}</p>
+<p> {{ link }}</p>
 
 
     </v-card>
@@ -24,17 +24,17 @@
 
                     </v-layout>
                 </v-slide-y-transition>
-                <v-btn color='purple' style='color:white;' type='button' @click='clear'> clear</v-btn>
+                <v-btn color='purple' style='color:white;' type='button' @click='clear'>Clear</v-btn>
             </v-container>
     </div>
     `,
     data:function (){
         return {
-            text: 'Články',
+            text: 'Links summary',
             isEnable: false,
             colorMsg: 'red',
             typeMsg: 'success',
-            odkazy: [],
+            links: [],
             resp:null,
             theArray:[],
 
@@ -45,8 +45,6 @@
     },
     props: {
        
-            
-   
         // type check
         height: Number,
     },
@@ -57,12 +55,12 @@
             this.isEnable = !this.isEnable
         },
         clear() {
-            this.odkazy = []
+            this.links = []
         },
     },
     created() {
         console.log('created')
-        window.document.title = 'Prehled odkazů form - Vue';
+        window.document.title = 'Links summary form - Vue';
         //this.clanky= [
         //        { 'id': '2a7c6470-8796-4a59-7e7b-08db223d9ced', 'nadpis': 'sdsssf', 'text': 'we', 'autor': 'e', 'publikovanoDne': '2023-03-08T00:00:00', 'publikovanoDo': '2023-03-17T00:00:00', 'vytvorenoDne': '2023-03-20T00:00:00', 'proPrihlasene': true, 'priloha': 'e', 'poradi': 'w', 'typClanku': 5 }
         //        , { 'id': '449b1c96-6284-4fde-7e7c-08db223d9ced', 'nadpis': 'sdf', 'text': 'we', 'autor': 'e', 'publikovanoDne': '2023-03-08T00:00:00', 'publikovanoDo': '2023-03-17T00:00:00', 'vytvorenoDne': '2023-03-20T00:00:00', 'proPrihlasene': true, 'priloha': 'e', 'poradi': 'w', 'typClanku': 5 }
@@ -76,7 +74,7 @@
         console.log('mounted')
 
         axios
-            .get(`/Odkaz/Prehled`)
+            .get(`/Link/Summary`)
             .then(res => {
                 for (let i = 0; i < res.data.length; i++) {
 
@@ -85,15 +83,9 @@
                         nadpis: res.data[i].nadpis,
                         text: res.data[i].text,
                     };
-                this.odkazy.push(newItem);
+                this.links.push(newItem);
                 }
-            })
-
-
-
-
-
-     
+            })     
     },
     beforeCreate: function () {
 

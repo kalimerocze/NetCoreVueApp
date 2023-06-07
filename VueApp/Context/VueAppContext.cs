@@ -16,103 +16,103 @@ namespace VueApp.Context
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Kontakt>().ToTable("Kontakt", c =>
+            modelBuilder.Entity<Contact>().ToTable("Contact", c =>
             {
                 c.IsTemporal(o =>
                 {
-                    o.UseHistoryTable("HistorieKontakt");
-                    o.HasPeriodStart("PlatneOd");
-                    o.HasPeriodEnd("PlatneDo");
+                    o.UseHistoryTable("HistoryContact");
+                    o.HasPeriodStart("ValidFrom");
+                    o.HasPeriodEnd("ValidTo");
 
                 });
 
             });
-            modelBuilder.Entity<Novinka>().ToTable("Novinka", c =>
+            modelBuilder.Entity<News>().ToTable("News", c =>
             {
                 c.IsTemporal(o =>
                 {
-                    o.UseHistoryTable("HistorieNovinka");
-                    o.HasPeriodStart("PlatneOd");
-                    o.HasPeriodEnd("PlatneDo");
+                    o.UseHistoryTable("HistoryNews");
+                    o.HasPeriodStart("ValidFrom");
+                    o.HasPeriodEnd("ValidTo");
 
                 });
 
             });
-            modelBuilder.Entity<Clanek>().ToTable("Clanek", c =>
+            modelBuilder.Entity<Article>().ToTable("Article", c =>
             {
                 c.IsTemporal(o =>
                 {
-                    o.UseHistoryTable("HistorieClanek");
-                    o.HasPeriodStart("PlatneOd");
-                    o.HasPeriodEnd("PlatneDo");
+                    o.UseHistoryTable("HistoryArticle");
+                    o.HasPeriodStart("ValidFrom");
+                    o.HasPeriodEnd("ValidTo");
 
                 });
 
             });
-            modelBuilder.Entity<Odkaz>().ToTable("Odkaz", c =>
+            modelBuilder.Entity<Link>().ToTable("Link", c =>
             {
                 c.IsTemporal(o =>
                 {
-                    o.UseHistoryTable("HistorieOdkaz");
-                    o.HasPeriodStart("PlatneOd");
-                    o.HasPeriodEnd("PlatneDo");
+                    o.UseHistoryTable("HistoryLink");
+                    o.HasPeriodStart("ValidFrom");
+                    o.HasPeriodEnd("ValidTo");
 
                 });
 
             });
-            modelBuilder.Entity<TypClanku>().ToTable("TypClanku", c =>
+            modelBuilder.Entity<ArticleType>().ToTable("ArticleType", c =>
             {
                 c.IsTemporal(o =>
                 {
-                    o.UseHistoryTable("HistorieTypClanku");
-                    o.HasPeriodStart("PlatneOd");
-                    o.HasPeriodEnd("PlatneDo");
+                    o.UseHistoryTable("HistoryArticleType");
+                    o.HasPeriodStart("ValidFrom");
+                    o.HasPeriodEnd("ValidTo");
 
                 });
 
             });
-            modelBuilder.Entity<TypOdkazu>().ToTable("TypOdkazu", c =>
+            modelBuilder.Entity<LinkType>().ToTable("LinkType", c =>
             {
                 c.IsTemporal(o =>
                 {
-                    o.UseHistoryTable("HistorieTypOdkazu");
-                    o.HasPeriodStart("PlatneOd");
-                    o.HasPeriodEnd("PlatneDo");
+                    o.UseHistoryTable("HistoryLinkType");
+                    o.HasPeriodStart("ValidFrom");
+                    o.HasPeriodEnd("ValidTo");
 
                 });
 
             });
-            modelBuilder.Entity<Soubor>().ToTable("Soubor", c =>
+            modelBuilder.Entity<Models.File>().ToTable("File", c =>
             {
                 c.IsTemporal(o =>
                 {
-                    o.UseHistoryTable("HistorieSoubor");
-                    o.HasPeriodStart("PlatneOd");
-                    o.HasPeriodEnd("PlatneDo");
+                    o.UseHistoryTable("HistoryFile");
+                    o.HasPeriodStart("ValidFrom");
+                    o.HasPeriodEnd("ValidTo");
 
                 });
 
             });
-            modelBuilder.Entity<Kategorie>().ToTable("Kategorie", c =>
+            modelBuilder.Entity<Category>().ToTable("Category", c =>
             {
                 c.IsTemporal(o =>
                 {
-                    o.UseHistoryTable("HistorieKategorie");
-                    o.HasPeriodStart("PlatneOd");
-                    o.HasPeriodEnd("PlatneDo");
+                    o.UseHistoryTable("HistoryCategory");
+                    o.HasPeriodStart("ValidFrom");
+                    o.HasPeriodEnd("ValidTo");
 
                 });
 
             });
 
         }
-        public DbSet<Clanek>? Clanek { get; set; }
-        public DbSet<Odkaz>? Odkaz { get; set; }
-        public DbSet<Soubor>? Soubor { get; set; }
-        public DbSet<Kontakt>? Kontakt { get; set; }
-        public DbSet<Novinka>? Novinka { get; set; }
-        public DbSet<Kategorie>? Kategorie { get; set; }
-        public DbSet<TypClanku>? TypClanku { get; set; }
-        public DbSet<TypOdkazu>? TypOdkazu { get; set; }
+        public DbSet<Article>? Article { get; set; }
+        public DbSet<Link>? Link { get; set; }
+        public DbSet<Models.File>? File { get; set; }
+        public DbSet<Contact>? Contact { get; set; }
+        public DbSet<News>? News { get; set; }
+        public DbSet<Category>? Category { get; set; }
+        public DbSet<ArticleType>? ArticleType { get; set; }
+        public DbSet<LinkType>? LinkType { get; set; }
     }
 }

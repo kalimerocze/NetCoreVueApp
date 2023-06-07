@@ -14,3 +14,7 @@ remove-migration
 --------------------history table 
  db.temporalAll()
  db.TemporalAsOf()
+
+
+
+ Add-Migration "New3"

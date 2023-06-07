@@ -20,13 +20,13 @@
                     </v-toolbar-items>
                     <v-spacer></v-spacer>
                     <v-toolbar-items>
-                      
-                        <v-btn text fill-height> <router-link style="text-decoration: none; color: inherit;" to="/home"><v-icon>mdi-home</v-icon>Domů </router-link></v-btn> &nbsp;
-                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/prehledSouboru"><v-icon>mdi-file</v-icon>Přehled souborů </router-link></v-btn> &nbsp;
+                        
+                        <v-btn text fill-height> <router-link style="text-decoration: none; color: inherit;" to="/home"><v-icon>mdi-home</v-icon>Home </router-link></v-btn> &nbsp;
+                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/fileSummary"><v-icon>mdi-file</v-icon>Files </router-link></v-btn> &nbsp;
                         <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/upload"><v-icon>mdi-upload</v-icon>Upload </router-link></v-btn>
-                        <v-menu offset-y>
+                        <v-menu offset-y text fill-height>
                             <template v-slot:activator="{ on, attrs }">
-                                <v-btn color="purple darken-1" v-ripple="false"
+                                <v-btn text fill-height v-ripple="false"
                                        dark
                                        v-bind="attrs"
                                        v-on="on">
@@ -38,12 +38,12 @@
                                 <v-list-item>
 
                                     <v-list-item-title>
-                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/novinky"> <v-icon>mdi-link</v-icon>Administrace novinek </router-link></v-btn> &nbsp;
-                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/kontakt"> <v-icon>mdi-link</v-icon>Administrace kontaktu </router-link></v-btn> &nbsp;
+                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/news"> <v-icon>mdi-link</v-icon>Administration news </router-link></v-btn> &nbsp;
+                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/contact"> <v-icon>mdi-link</v-icon>Administration contact </router-link></v-btn> &nbsp;
 
-                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/odkazy"> <v-icon>mdi-link</v-icon>Administrace odkazů </router-link></v-btn> &nbsp;
-                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/clanky"> <v-icon>mdi-laptop</v-icon>Administrace článků </router-link></v-btn> &nbsp;
-                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/kategorie"> <v-icon>mdi-book</v-icon>Kategorie</router-link></v-btn>
+                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/links"> <v-icon>mdi-link</v-icon>Administration links </router-link></v-btn> &nbsp;
+                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/articles"> <v-icon>mdi-laptop</v-icon>Administration articles </router-link></v-btn> &nbsp;
+                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/category"> <v-icon>mdi-book</v-icon>Categories</router-link></v-btn>
                                     </v-list-item-title>
                                 </v-list-item>
                             </v-list>
@@ -52,8 +52,8 @@
                                 <v-list-item>
 
                                     <v-list-item-title>
-                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/prehledKontaktu"> <v-icon>mdi-link</v-icon>prehledKontaktu </router-link></v-btn> &nbsp;
-                                      
+                                        <v-btn text fill-height>  <router-link style="text-decoration: none; color: inherit;" to="/contactSummary"> <v-icon>mdi-link</v-icon>Contacts </router-link></v-btn> &nbsp;
+
                                     </v-list-item-title>
                                 </v-list-item>
                             </v-list>
@@ -85,45 +85,45 @@
     <script src="home.js"></script>
     <script src="Upload.js"></script>
     <script src="Soubor.js"></script>
-    <script src="/Admin/Odkazy.js"></script>
-    <script src="/Admin/Novinky.js"></script>
-    <script src="/Admin/Clanky.js"></script>
-    <script src="/Admin/Kontakt.js"></script>
-    <script src="/Admin/Kategorie.js"></script>
-    <script src="/Admin/PrehledNovinek.js"></script>
-    <script src="/Admin/PrehledSouboru.js"></script>
-    <script src="/Admin/PrehledClanku.js"></script>
-    <script src="/Admin/PrehledOdkazu.js"></script>
-    <script src="ClankyMainPage.js"></script>
-    <script src="/Admin/KontaktyPrehled.js"></script>
+    <script src="/Admin/Links.js"></script>
+    <script src="/Admin/News.js"></script>
+    <script src="/Admin/Articles.js"></script>
+    <script src="/Admin/Contact.js"></script>
+    <script src="/Admin/Category.js"></script>
+    <script src="/Admin/NewsSummary.js"></script>
+    <script src="/Admin/FileSummary.js"></script>
+    <script src="/Admin/ArticlesSummary.js"></script>
+    <script src="/Admin/LinksSummary.js"></script>
+    <!--<script src="ClankyMainPage.js"></script>-->
+    <script src="/Admin/ContactsSummary.js"></script>
     <!-- Vue Pages -->
     <script>
-        const Foo = { template: '<div>Stránka číslo 1</div>' }
-        const Bar = { template: '<div>stránka číslo 2 bar</div>' }
+        const Foo = { template: '<div>Page number 1</div>' }
+        const Bar = { template: '<div>Page number 2</div>' }
 
-        const NotFound = { template: '<div>Nenalezeno!!! zkuste to prosím později</div>' }
+        const NotFound = { template: '<div>Page not found!!! Try it later again, please. </div>' }
 
         const routes = [
             { path: '/home', component: Home },
             { path: '/upload', component: Upload },
-            { path: '/clanky', component: Clanky, props: {
-                Clanky: {
+            { path: '/articles', component: Articles, props: {
+                Articles: {
                         clanky: ['arr1', 'arr2']
                 }
                 }
             },
           //  { path: '/bar', component: Home },
-            { path: '/kontakt', component: Kontakty },
-            { path: '/soubor', component: Soubor },
-            { path: '/novinky', component: Novinky },
-            { path: '/odkazy', component: Odkazy },
-            { path: '/kategorie', component: Kategorie },
-            { path: '/prehledNovinek', component: prehledNovinky },
-            { path: '/prehledSouboru', component: prehledSouboru },
-            { path: '/prehledKontaktu', component: prehledKontaktu },
-            { path: '/prehledClanku', component: prehledClanky },
-            { path: '/prehledOdkazu', component: prehledOdkazy },
-            { path: '/clankyMainPage', component: prehledOdkazy },
+            { path: '/contact', component: Contact },
+            { path: '/file', component: File },
+            { path: '/news', component: News },
+            { path: '/links', component: Links },
+            { path: '/category', component: Category },
+            { path: '/newsSummary', component: NewsSummary },
+            { path: '/fileSummary', component: FileSummary },
+            { path: '/ContactsSummary', component: ContactsSummary },
+            { path: '/ArticlesSummary', component: ArticlesSummary },
+            { path: '/linksSummary', component: LinksSummary },
+            //{ path: '/clankyMainPage', component: prehledOdkazy },
             { path: '/*', component: Home }
             //{ path: '*', component: NotFound }
 
@@ -146,7 +146,7 @@
 
             vuetify: new Vuetify({
                 lang: {
-                    current: 'cs',
+                    current: 'en',
                 }
             }),
 
@@ -161,8 +161,8 @@
                 nav: [
                     {
                         icon: 'mdi-home',
-                        text: 'Domů',
-                        title: 'Zpět na domovskou stránku',
+                        text: 'Home',
+                        title: 'Back to home page',
                         active: true,
                         name: 'page1'
                     }

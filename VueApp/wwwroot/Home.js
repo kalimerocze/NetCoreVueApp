@@ -5,16 +5,13 @@
             <v-row no-gutters>
                 <v-col cols='12' sm='12'>
                     <v-card class='pa-2' outlined tile>
-                        <h1 class='grey darken-2 white--text text-center'>Přehled novinek</h1>
-                        <button @click='toggle'>Toggle Show / Hide Other text</button>
-                        <br><br>
-                        <h2 v-if='isEnable'>Pee nadpis !</h2>
-                        <div v-for='novinka in novinky' :key='novinka.id'>
+                        <h1 class='grey darken-2 white--text text-center'>List of news</h1>
+                        <div v-for='item in news' :key='item.id'>
                             <v-card >
-                                <h1 class=' blue-grey lighten-3 white--text text-center'>{{ novinka.nadpis }}</h1>
+                                <h1 class=' blue-grey lighten-3 white--text text-center'>{{ item.title }}</h1>
 
-                                <p> {{ novinka.text }}</p>
-
+                                <p> {{ item.text }}</p>
+                                        
 
                             </v-card>
                         </div>
@@ -29,15 +26,15 @@
             <v-row no-gutters>
                 <v-col cols='12' sm='6'>
                     <v-card class='pa-2' outlined tile>
-                        <h1 class='grey darken-2 white--text text-center'>Přehled článků</h1>
-                        <button @click='toggle'>Toggle Show / Hide Other text</button>
-                        <br><br>
-                        <h2 v-if='isEnable'>Pee nadpis !</h2>
-                        <div v-for='clanek in clanky' :key='clanek.id'>
+                        <h1 class='grey darken-2 white--text text-center'>List of articles</h1>
+                        
+                        <div v-for='article in articles' :key='article.id'>
                             <v-card width='400'>
-                                <h1 class='blue-grey lighten-3 white--text text-center'>{{ clanek.nadpis }}</h1>
+                                <h1 class='blue-grey lighten-3 white--text text-center'>{{ article.title }}</h1>
 
-                                <p> {{ clanek.text }}</p>
+                                <p> {{ article.text }}</p>
+                                <p> {{ article.author }}</p>
+                                <p> {{ article.publishedTo }}</p>
 
                             </v-card>
                         </div>
@@ -46,15 +43,14 @@
                 </v-col>
                 <v-col cols='12' sm='6'>
                     <v-card class='pa-2' outlined tile>
-                        <h1 class='grey darken-2 white--text text-center'>Přehled odkazů</h1>
-                        <button @click='toggle'>Toggle Show / Hide Other text</button>
-                        <br><br>
-                        <h2 v-if='isEnable'>Pee nadpis !</h2>
-                        <div v-for='odkaz in odkazy' :key='odkaz.id'>
+                        <h1 class='grey darken-2 white--text text-center'>List of links</h1>
+                      
+                        <div v-for='link in links' :key='link.id'>
                             <v-card width='400'>
-                                <h1 class='blue-grey lighten-3 white--text text-center'>{{ odkaz.popis }}</h1>
+                                <h1 class='blue-grey lighten-3 white--text text-center'>{{ link.description }}</h1>
 
-                                <p> {{ odkaz.text }}</p>
+                                <p> {{ link.text }}</p>
+                                <p> {{ link.description }}</p>
 
 
                             </v-card>
@@ -63,39 +59,37 @@
                 </v-col>
                 <v-col cols='12' sm='12'>
                     <v-card class='pa-2' outlined tile>
-                        <h1 class='grey darken-2 white--text text-center'>Kontakty</h1>
-                        <button @click='toggle'>Toggle Show / Hide Other text</button>
-                        <br><br>
-                        <h2 v-if='isEnable'>Pee nadpis !</h2>
+                        <h1 class='grey darken-2 white--text text-center'>Contacts</h1>
+                        
                         <v-simple-table>
                             <template v-slot:default>
                                 <thead>
                                     <tr>
                                         <th class="text-left">
-                                            jméno
+                                            Name
                                         </th>
                                         <th class="text-left">
-                                            prijmení
+                                            Surname
                                         </th>
                                         <th class="text-left">
-                                            telefon
+                                            Phone
                                         </th>
                                         <th class="text-left">
-                                            aktivní
+                                            Active
                                         </th>
                                         <th class="text-left">
-                                            město
+                                            City
                                         </th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in kontakty" :key="item.name">
-                                        <td>{{ item.jmeno }}</td>
-                                        <td>{{ item.prijmeni }}</td>
-                                        <td>{{ item.telefon }}</td>
-                                        <td>{{ item.aktivni }}</td>
-                                        <td>{{ item.mesto }}</td>
+                                    <tr v-for="item in contacts" :key="item.id">
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.surname }}</td>
+                                        <td>{{ item.phone }}</td>
+                                        <td> <span :class="item.active? 'mdi mdi-check green--text':'mdi mdi-cancel red--text'"></span>     </td>
+                                        <td>{{ item.city }}</td>
                                     </tr>
                                 </tbody>
                             </template>
@@ -107,11 +101,11 @@
             <v-row no-gutters>
                 <v-col cols='12' sm='12'>
                     <v-card class='pa-2' outlined tile>
-                        <h1 class='grey darken-2 white--text text-center'> Přehled souborů v úložišti</h1>
+                        <h1 class='grey darken-2 white--text text-center'> Uploaded files </h1>
                         <button @click='toggle'>Toggle Show / Hide Other text</button>
                         <br><br>
-                        <h2 v-if='isEnable'>Pee nadpis !</h2>
-                        <v-btn color='purple' style='color:white;' to='/prehledSouboru'>Soubory</v-btn>
+                        <h2 v-if='isEnable'>To be defined !</h2>
+                        <v-btn color='purple' style='color:white;' to='/FileSummary'>Files</v-btn>
                     </v-card>
                 </v-col>
             </v-row>
@@ -120,12 +114,12 @@
 `,
     data() {
         return {
-            text: 'Domů',
+            text: 'Home',
             isEnable: false,
-            clanky: [],
-            novinky: [],
-            odkazy: [],
-            kontakty: [],
+            articles: [],
+            news: [],
+            links: [],
+            contacts: [],
 
         }
     },
@@ -135,75 +129,74 @@
         }
     },
     created() {
-        window.document.title = 'Hl. stránka - Vue'
+        window.document.title = 'Main page - Vue'
     },
     mounted() {
 
         console.log('mounted')
         axios
-            .get(`/Odkaz/Prehled`)
+            .get(`/Link/Summary`)
             .then(res => {
                 for (let i = 0; i < res.data.length; i++) {
 
                     var newItem = {
                         id: res.data[i].id,
-                        popis: res.data[i].popis,
+                        description: res.data[i].description,
                         text: res.data[i].text,
+                        publishedTo: res.data[i].publishedTo,
                     };
-                    this.odkazy.push(newItem);
+                    this.links.push(newItem);
                 }
             })
 
         axios
-            .get(`/Novinka/Prehled`)
+            .get(`/News/Summary`)
             .then(res => {
                 for (let i = 0; i < res.data.length; i++) {
 
                     var newItem = {
                         id: res.data[i].id,
-                        nadpis: res.data[i].nadpis,
+                        title: res.data[i].title,
                         text: res.data[i].text,
+                        author: res.data[i].author,
                     };
-                    this.novinky.push(newItem);
+                    this.news.push(newItem);
                 }
             })
 
         axios
-            .get(`/Kontakt/Prehled`)
+            .get(`/Contact/Summary`)
             .then(res => {
                 for (let i = 0; i < res.data.length; i++) {
 
                     var newItem = {
                         id: res.data[i].id,
-                        nadpis: res.data[i].nadpis,
-                        text: res.data[i].text,
+                        name: res.data[i].name,
+                        surname: res.data[i].surname,
+                        phone: res.data[i].phone,
+                        active: res.data[i].active,
+                        city: res.data[i].city,
                     };
-                    this.kontakty.push(newItem);
+                    this.contacts.push(newItem);
                 }
             })
-
 
 
 
         axios
-            .get(`/Clanek/Prehled`)
+            .get(`/Article/Summary`)
             .then(res => {
                 for (let i = 0; i < res.data.length; i++) {
 
                     var newItem = {
                         id: res.data[i].id,
-                        nadpis: res.data[i].nadpis,
+                        title: res.data[i].title,
                         text: res.data[i].text,
+                        author: res.data[i].author,
+                        publishedTo: res.data[i].publishedTo,
                     };
-                    this.clanky.push(newItem);
+                    this.articles.push(newItem);
                 }
             })
-
-
-
-
-
-
     },
-
 }
