@@ -2,24 +2,32 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using VueApp;
 using VueApp.Context;
-
-var builder = WebApplication.CreateBuilder(args);//vytvori root aplikace
+using Microsoft.AspNetCore.Authentication.Negotiate;
+//
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+   .AddNegotiate();
+builder.Services.AddAuthorization(options =>
+{
+    // By default, all incoming requests will be authorized according to the default policy.
+    options.FallbackPolicy = options.DefaultPolicy;
+});
 // Add your logging handler
 builder.Host.ConfigureLogging(builder =>
-{   // Configuration here:
+{   
     builder.SetMinimumLevel(LogLevel.Trace);
     builder.AddLog4Net("log4net.config");
 });
 builder.Configuration.AddJsonFile($"AppSettings.json", true, true);
 builder.Services.AddDbContext<VueAppDbContext>(options => options.UseSqlServer(builder.Configuration["DevConnection"]));
 builder.Services.Configure<AppSettingsModel>(builder.Configuration.GetSection("ApplicationSettings"));
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 //builder.Services.AddScoped<IClaimsTransformer, MyClaimsTransformer>(); 
 
 var app = builder.Build();
@@ -30,11 +38,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseStaticFiles();//enables tatic file to be served on client
-app.UseHttpsRedirection();//pøesmìruje všechny httppozadavky na https
+app.UseStaticFiles();//enables static file to be served on client
+app.UseHttpsRedirection();
 app.UseRouting();//
+app.UseAuthentication();
 app.UseAuthorization();
-//app.MapRazorPages();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();//is used to map any attributes that may exist on the controllers, like, [Route], [HttpGet], etc.

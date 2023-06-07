@@ -1,4 +1,4 @@
-﻿const Soubor = {
+﻿const File = {
     template: `
     <div>
         <v-form ref="entryForm" id="form" name="idForm">
@@ -10,12 +10,12 @@
                 </v-alert>
                 <v-slide-y-transition mode="out-in">
                     <v-layout column align-start>
-                        <h1 class="display-1">Sekce administrace souborů <br /><br /></h1>
+                        <h1 class="display-1">Section of files administration <br /><br /></h1>
                         Administrace souborů
                         <v-form class="block" ref="entryForm">
                             <v-container>
                                 <v-flex>
-                                    <v-text-field label="Nadpis" placeholder="Nadpis" v-model="Soubor.nadpis"></v-text-field>
+                                    <v-text-field label="Title" placeholder="Title" v-model="Soubor.title"></v-text-field>
                                     <v-text-field label="autor" placeholder="autor" v-model="Soubor.autor"></v-text-field>
                                     <v-text-field label="Text" placeholder="Text" v-model="Soubor.text"></v-text-field>
                                     <v-date-picker v-model="Soubor.publikovanoDne"></v-date-picker>
