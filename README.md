@@ -1,4 +1,5 @@
 # NetCoreVueApp
+Basic CRUD operations
 
 ## Backend 
 backend is created on base of .Net Core Rest API 
